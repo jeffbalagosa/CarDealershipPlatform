@@ -12,6 +12,7 @@ import CustomerList from "./CustomerList";
 import SalespersonList from "./SalespersonList";
 import ModelsList from "./ModelsList";
 import AutomobilesList from "./AutomobileList";
+import TechnicianList from "./TechnicianList";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
@@ -19,6 +20,18 @@ function App() {
   const [salespersons, setSalespersons] = useState([]);
   const [models, setModels] = useState([]);
   const [autos, setAutos] = useState([]);
+  const [technicians, setTechnicians] = useState([]);
+
+  async function getTechnicians() {
+    const url = "http://localhost:8080/api/technicians/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const { technicians } = await response.json();
+      setTechnicians(technicians);
+    } else {
+      console.log("An error occurred fetching the data");
+    }
+  }
 
   async function getManufacturers() {
     const url = "http://localhost:8100/api/manufacturers/";
@@ -47,7 +60,6 @@ function App() {
     const response = await fetch(url);
     if (response.ok) {
       const { autos } = await response.json();
-      console.log(autos);
       setAutos(autos);
     } else {
       console.log("An error occurred fetching the data");
@@ -72,6 +84,7 @@ function App() {
     getManufacturers();
     getModels();
     getAutos();
+    getTechnicians();
   }, []);
 
   return (
@@ -107,6 +120,12 @@ function App() {
             <Route
               path="list"
               element={<CustomerList customers={customers} />}
+            />
+          </Route>
+          <Route path="technicians">
+            <Route
+              path="list"
+              element={<TechnicianList technicians={technicians} />}
             />
           </Route>
         </Routes>
