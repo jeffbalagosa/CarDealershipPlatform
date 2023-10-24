@@ -17,13 +17,13 @@ def poll(repeat=True):
     while True:
         print('Sales poller polling for data')
         try:
-            response = requests.get("http://inventory-api-1:8000/api/automobiles/")
+            response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles")
             content = json.loads(response.content)
-            for automobile in content["automobiles"]:
+            for autos in content["autos"]:
                 AutomobileVO.objects.update_or_create(
-                    import_href=automobile["href"],
-                    defaults={"vin": automobile["vin"],
-                              "sold": automobile['sold']},
+                    import_href=autos["href"],
+                    defaults={"vin": autos["vin"],
+                              "sold": autos['sold']},
         )
 
             pass
