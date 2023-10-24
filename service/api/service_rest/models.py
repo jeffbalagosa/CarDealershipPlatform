@@ -30,12 +30,6 @@ class Appointment(models.Model):
     def get_api_url(self):
         return reverse("api_list_appointments", kwargs={"pk": self.pk})
 
-    # auto set status to created when new appointment is created
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.status = "created"
-        super().save(*args, **kwargs)
-
     def __str__(self):
         return (
             f"{self.date_time} {self.reason} {self.status} {self.vin} {self.technician}"
