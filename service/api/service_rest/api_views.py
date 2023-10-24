@@ -81,6 +81,8 @@ def api_list_appointments(request):
 
         content["technician"] = technician
         appointment = Appointment.objects.create(**content)
+        appointment.status = "created"
+        appointment.save()
         return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
 
 
