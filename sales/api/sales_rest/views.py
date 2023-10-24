@@ -18,7 +18,7 @@ class CustomerEncoder(ModelEncoder):
 def list_salesperson(request):
 
     if request.method == "GET":
-        salespersons = Salesperson.objects.all
+        salespersons = Salesperson.objects.all()
         return JsonResponse(
             {"salespersons": salespersons},
             encoder=SalespersonEncoder
@@ -50,7 +50,7 @@ def salesperson_detail(request, pk):
 def list_customer(request):
 
     if request.method == "GET":
-        customers = Customer.objects.all
+        customers = Customer.objects.all()
         return JsonResponse(
             {"customers": customers},
             encoder=CustomerEncoder
