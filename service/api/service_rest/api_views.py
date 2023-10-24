@@ -16,23 +16,15 @@ class AutomobileVOListEncoder(ModelEncoder):
 
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
-    properties = ["first_name", "last_name", "employee_id"]
+    properties = ["id", "first_name", "last_name"]
 
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
-    properties = ["date_time", "reason", "status", "vin"]
+    properties = ["id", "date_time", "reason", "status", "vin", "customer"]
 
     def get_extra_data(self, obj):
-        return {"technician": obj.technician.employee_id}
-
-
-class AppointmentDetailEncoder(ModelEncoder):
-    model = Appointment
-    properties = ["date_time", "reason", "status", "vin"]
-
-    def get_extra_data(self, obj):
-        return {"technician": obj.technician.employee_id}
+        return {"technician": obj.technician.id}
 
 
 @require_http_methods(["GET", "POST"])
@@ -42,9 +34,6 @@ def api_list_technicians(request):
         return JsonResponse({"technicians": technicians}, encoder=TechnicianListEncoder)
     else:
         content = json.loads(request.body)
-        first_name = content["first_name"]
-        last_name = content["last_name"]
-        employee_id = content["employee_id"]
         technician = Technician.objects.create(**content)
         return JsonResponse(technician, encoder=TechnicianListEncoder, safe=False)
 
@@ -63,7 +52,6 @@ def technician_detail(request, pk):
             technician = Technician.objects.get(pk=pk)
             technician.first_name = content["first_name"]
             technician.last_name = content["last_name"]
-            technician.employee_id = content["employee_id"]
             return JsonResponse(technician, encoder=TechnicianListEncoder, safe=False)
         except Technician.DoesNotExist:
             return JsonResponse({"message": "Technician does not exist."}, status=404)
@@ -80,9 +68,9 @@ def api_list_appointments(request):
         return JsonResponse(
             {"appointments": appointments}, encoder=AppointmentListEncoder, safe=False
         )
-    elif request.method == "POST":
+    else:
         content = json.loads(request.body)
-        technician_id = content.pop("technician")
+        technician_id = content["technician"]
         try:
             technician = Technician.objects.get(pk=technician_id)
         except Technician.DoesNotExist:
@@ -91,3 +79,35 @@ def api_list_appointments(request):
         content["technician"] = technician
         appointment = Appointment.objects.create(**content)
         return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
+
+
+@require_http_methods(["GET", "DELETE"])
+def appointment_detail(request, pk):
+    if request.method == "GET":
+        appointment = Appointment.objects.get(pk=pk)
+        return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
+    else:
+        count, _ = Appointment.objects.filter(pk=pk).delete()
+        return JsonResponse({"deleted": count > 0})
+
+
+@require_http_methods(["PUT"])
+def appointment_cancel(request, pk):
+    try:
+        appointment = Appointment.objects.get(pk=pk)
+        appointment.status = "cancelled"
+        appointment.save()
+        return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
+    except Appointment.DoesNotExist:
+        return JsonResponse({"message": "Appointment does not exist."}, status=404)
+
+
+@require_http_methods(["PUT"])
+def appointment_finish(request, pk):
+    try:
+        appointment = Appointment.objects.get(pk=pk)
+        appointment.status = "finished"
+        appointment.save()
+        return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
+    except Appointment.DoesNotExist:
+        return JsonResponse({"message": "Appointment does not exist."}, status=404)
