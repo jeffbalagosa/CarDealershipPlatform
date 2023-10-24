@@ -1,17 +1,3 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from './MainPage';
-import Nav from './Nav';
-import ManufacturerForm from './ManufacturerForm';
-import ModelForm from './ModelForm';
-import AutomobileForm from './AutomobileForm';
-import SalespersonForm from './SalespersonForm';
-import CustomerForm from './CustomerForm';
-import CustomerList from './CustomerList';
-import SalespersonList from './SalespersonList';
-import SaleForm from './SaleForm';
-import { useState, useEffect } from 'react';
-
-
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./MainPage";
@@ -25,13 +11,18 @@ import SalespersonForm from "./SalespersonForm";
 import CustomerForm from "./CustomerForm";
 import CustomerList from "./CustomerList";
 import SalespersonList from "./SalespersonList";
+import SaleForm from "./SaleForm";
+import SalesList from "./SalesList";
+
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [salespersons, setSalespersons] = useState([]);
+  const [autos, setAutos] = useState([]);
+  const [sales, setSales] = useState([]);
 
-  async function getManufacturers() {
+  async function loadManufacturers() {
     const url = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(url);
     if (response.ok) {
@@ -42,6 +33,11 @@ function App() {
     }
   }
 
+  async function loadAutos() {
+    const response = await fetch('http://localhost:8100/api/automobiles/');
+    const { autos } = await response.json();
+    setAutos(autos);
+  }
   async function loadCustomers() {
     const response = await fetch("http://localhost:8090/api/customers/");
     const { customers } = await response.json();
@@ -54,15 +50,20 @@ function App() {
     setSalespersons(salespersons);
   }
 
+  async function loadSales() {
+    const response = await fetch("http://localhost:8090/api/sales/");
+    const { sales } = await response.json();
+    setSales(sales);
+  }
+
   useEffect(() => {
     loadCustomers();
     loadSalespersons();
     loadAutos();
+    loadManufacturers();
+    loadSales();
   }, [])
 
-
-    getManufacturers();
-  }, []);
 
   return (
     <BrowserRouter>
@@ -99,7 +100,7 @@ function App() {
           </Route>
           <Route path='sales'>
             <Route path="create" element={<SaleForm customers={customers} salespersons={salespersons} autos = {autos}/>} />
-            {/* <Route path="list" element={<CustomerList customers={customers} />} /> */}
+            <Route path="list" element={<SalesList sales={sales} />} />
           </Route>
         </Routes>
       </div>

@@ -19,7 +19,7 @@ class AutomobileVOEncoder(ModelEncoder):
 
 class SaleEncoder(ModelEncoder):
     model = Sale
-    properties = ["price","customer","salesperson","automobile"]
+    properties = ["price","customer","salesperson","automobile","id"]
     encoders = {
         "customer": CustomerEncoder(),
         "salesperson": SalespersonEncoder(),
@@ -135,3 +135,15 @@ def list_sales(request):
             encoder=SaleEncoder,
             safe=False,
         )
+@require_http_methods(["DELETE", "GET"])
+def sales_detail(request, pk):
+    if request.method == "GET":
+        sale = Sale.objects.get(id=pk)
+        return JsonResponse(
+            sale,
+            encoder=SaleEncoder,
+            safe=False,
+        )
+    else:
+        count, _ = Sale.objects.filter(id=pk).delete()
+        return JsonResponse({"deleted": count > 0})
