@@ -16,7 +16,10 @@ class AutomobileVOListEncoder(ModelEncoder):
 
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
-    properties = ["id", "first_name", "last_name"]
+    properties = ["first_name", "last_name"]
+
+    def get_extra_data(self, obj):
+        return {"employee_id": obj.id}
 
 
 class AppointmentListEncoder(ModelEncoder):
