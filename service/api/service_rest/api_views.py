@@ -6,6 +6,14 @@ from django.http import JsonResponse
 import json
 
 
+class AutomobileVOListEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = ["import_href", "vin", "sold"]
+
+    def get_extra_data(self, obj):
+        return {"import_href": obj.import_href}
+
+
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
     properties = ["first_name", "last_name", "employee_id"]
@@ -13,7 +21,15 @@ class TechnicianListEncoder(ModelEncoder):
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
-    properties = ["date_time", "reason", "status", "vin", "technician"]
+    properties = ["date_time", "reason", "status", "vin"]
+
+    def get_extra_data(self, obj):
+        return {"technician": obj.technician.employee_id}
+
+
+class AppointmentDetailEncoder(ModelEncoder):
+    model = Appointment
+    properties = ["date_time", "reason", "status", "vin"]
 
     def get_extra_data(self, obj):
         return {"technician": obj.technician.employee_id}
@@ -25,7 +41,6 @@ def api_list_technicians(request):
         technicians = Technician.objects.all()
         return JsonResponse({"technicians": technicians}, encoder=TechnicianListEncoder)
     else:
-        # Create a new technician
         content = json.loads(request.body)
         first_name = content["first_name"]
         last_name = content["last_name"]
@@ -56,3 +71,23 @@ def technician_detail(request, pk):
         Technician.objects.filter(pk=pk).update(**content)
         technician = Technician.objects.get(pk=pk)
         return JsonResponse(technician, encoder=TechnicianListEncoder, safe=False)
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_appointments(request):
+    if request.method == "GET":
+        appointments = Appointment.objects.all()
+        return JsonResponse(
+            {"appointments": appointments}, encoder=AppointmentListEncoder, safe=False
+        )
+    elif request.method == "POST":
+        content = json.loads(request.body)
+        technician_id = content.pop("technician")
+        try:
+            technician = Technician.objects.get(pk=technician_id)
+        except Technician.DoesNotExist:
+            return JsonResponse({"message": "Technician does not exist."}, status=404)
+
+        content["technician"] = technician
+        appointment = Appointment.objects.create(**content)
+        return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
