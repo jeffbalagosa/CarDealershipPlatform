@@ -10,11 +10,13 @@ import SalespersonForm from "./SalespersonForm";
 import CustomerForm from "./CustomerForm";
 import CustomerList from "./CustomerList";
 import SalespersonList from "./SalespersonList";
+import ModelsList from "./ModelsList";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [salespersons, setSalespersons] = useState([]);
+  const [models, setModels] = useState([]);
 
   async function getManufacturers() {
     const url = "http://localhost:8100/api/manufacturers/";
@@ -22,6 +24,17 @@ function App() {
     if (response.ok) {
       const { manufacturers } = await response.json();
       setManufacturers(manufacturers);
+    } else {
+      console.log("An error occurred fetching the data");
+    }
+  }
+
+  async function getModels() {
+    const url = "	http://localhost:8100/api/models/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const { models } = await response.json();
+      setModels(models);
     } else {
       console.log("An error occurred fetching the data");
     }
@@ -43,6 +56,7 @@ function App() {
     loadCustomers();
     loadSalespersons();
     getManufacturers();
+    getModels();
   }, []);
 
   return (
@@ -60,6 +74,7 @@ function App() {
           </Route>
           <Route path="models">
             <Route path="create" element={<ModelForm />} />
+            <Route path="list" element={<ModelsList models={models} />} />
           </Route>
           <Route path="automobiles">
             <Route path="create" element={<AutomobileForm />} />
