@@ -12,28 +12,15 @@ class TechnicianListEncoder(ModelEncoder):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_technicians(request, pk=None):
+def api_list_technicians(request):
     if request.method == "GET":
-        if pk:
-            technician = Technician.objects.get(pk=pk)
-            return JsonResponse(TechnicianListEncoder().default(technician))
-        else:
-            technicians = Technician.objects.all()
-            return JsonResponse(
-                TechnicianListEncoder().default(technicians), safe=False
-            )
+        technicians = Technician.objects.all()
+        return JsonResponse({"technicians": technicians}, encoder=TechnicianListEncoder)
     else:
+        # Create a new technician
         content = json.loads(request.body)
-
-        try:
-            first_name = content["first_name"]
-            last_name = content["last_name"]
-            employee_id = content["employee_id"]
-        except KeyError:
-            return JsonResponse(
-                {"error": "first_name, last_name, and employee_id are required"},
-                status=400,
-            )
-
+        first_name = content["first_name"]
+        last_name = content["last_name"]
+        employee_id = content["employee_id"]
         technician = Technician.objects.create(**content)
         return JsonResponse(technician, encoder=TechnicianListEncoder, safe=False)
