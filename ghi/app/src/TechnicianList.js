@@ -2,7 +2,7 @@ function TechnicianList(props) {
   return (
     <>
       <h1 className="mb-3 text-center">Technicians</h1>
-      <table className="table table-hover">
+      <table className="table table-hover table-striped">
         <thead>
           <tr>
             <th scope="col">Employee ID #</th>
