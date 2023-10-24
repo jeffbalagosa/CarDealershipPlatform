@@ -27,7 +27,7 @@ class AppointmentListEncoder(ModelEncoder):
     properties = ["id", "date_time", "reason", "status", "vin", "customer"]
 
     def get_extra_data(self, obj):
-        return {"technician": obj.technician.id}
+        return {"technician": f"{obj.technician.first_name} {obj.technician.last_name}"}
 
 
 @require_http_methods(["GET", "POST"])
