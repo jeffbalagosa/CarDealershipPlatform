@@ -6,9 +6,15 @@ import ModelForm from "./ModelForm";
 import AutomobileForm from "./AutomobileForm";
 import ManufacturerList from "./ManufacturerList";
 import { useState, useEffect } from "react";
+import SalespersonForm from "./SalespersonForm";
+import CustomerForm from "./CustomerForm";
+import CustomerList from "./CustomerList";
+import SalespersonList from "./SalespersonList";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [salespersons, setSalespersons] = useState([]);
 
   async function getManufacturers() {
     const url = "http://localhost:8100/api/manufacturers/";
@@ -21,7 +27,21 @@ function App() {
     }
   }
 
+  async function loadCustomers() {
+    const response = await fetch("http://localhost:8090/api/customers/");
+    const { customers } = await response.json();
+    setCustomers(customers);
+  }
+
+  async function loadSalespersons() {
+    const response = await fetch("http://localhost:8090/api/salespeople/");
+    const { salespersons } = await response.json();
+    setSalespersons(salespersons);
+  }
+
   useEffect(() => {
+    loadCustomers();
+    loadSalespersons();
     getManufacturers();
   }, []);
 
@@ -43,6 +63,20 @@ function App() {
           </Route>
           <Route path="automobiles">
             <Route path="create" element={<AutomobileForm />} />
+          </Route>
+          <Route path="salespeople">
+            <Route path="create" element={<SalespersonForm />} />
+            <Route
+              path="list"
+              element={<SalespersonList salespersons={salespersons} />}
+            />
+          </Route>
+          <Route path="customers">
+            <Route path="create" element={<CustomerForm />} />
+            <Route
+              path="list"
+              element={<CustomerList customers={customers} />}
+            />
           </Route>
         </Routes>
       </div>
