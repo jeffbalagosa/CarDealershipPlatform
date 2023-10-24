@@ -7,11 +7,11 @@ from common.json import ModelEncoder
 
 class SalespersonEncoder(ModelEncoder):
     model = Salesperson
-    properties = ["first_name", "last_name", "employee_id"]
+    properties = ["first_name", "last_name", "employee_id","id"]
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
-    properties = ["first_name", "last_name", "address", "phone_number"]
+    properties = ["first_name", "last_name", "address", "phone_number","id"]
 
 
 @require_http_methods(["GET", "POST"])
