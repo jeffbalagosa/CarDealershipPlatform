@@ -25,7 +25,7 @@ function App() {
   const [technicians, setTechnicians] = useState([]);
   const [appointments, setAppointments] = useState([]);
 
-  async function getTechnicians() {
+  async function loadTechnicians() {
     const url = "http://localhost:8080/api/technicians/";
     const response = await fetch(url);
     if (response.ok) {
@@ -36,7 +36,7 @@ function App() {
     }
   }
 
-  async function getAppointments() {
+  async function loadAppointments() {
     const url = "http://localhost:8080/api/appointments/";
     const response = await fetch(url);
     if (response.ok) {
@@ -47,7 +47,7 @@ function App() {
     }
   }
 
-  async function getManufacturers() {
+  async function loadManufacturers() {
     const url = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(url);
     if (response.ok) {
@@ -58,7 +58,7 @@ function App() {
     }
   }
 
-  async function getModels() {
+  async function loadModels() {
     const url = "http://localhost:8100/api/models/";
     const response = await fetch(url);
     if (response.ok) {
@@ -69,7 +69,7 @@ function App() {
     }
   }
 
-  async function getAutos() {
+  async function loadAutos() {
     const url = "http://localhost:8100/api/automobiles/";
     const response = await fetch(url);
     if (response.ok) {
@@ -95,11 +95,11 @@ function App() {
   useEffect(() => {
     loadCustomers();
     loadSalespersons();
-    getManufacturers();
-    getModels();
-    getAutos();
-    getTechnicians();
-    getAppointments();
+    loadManufacturers();
+    loadModels();
+    loadAutos();
+    loadTechnicians();
+    loadAppointments();
   }, []);
 
   return (
