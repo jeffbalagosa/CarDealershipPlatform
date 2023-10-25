@@ -20,5 +20,6 @@ urlpatterns = [
     path(
         "appointments/<int:pk>/finish/", appointment_finish, name="appointment_finish"
     ),
+    # Used to verify VIP status
     path("check_vin/<str:vin>/", check_vin_in_inventory, name="check_vin_in_inventory"),
 ]
