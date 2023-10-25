@@ -80,6 +80,7 @@ def api_list_appointments(request):
             return JsonResponse({"message": "Technician does not exist."}, status=404)
 
         content["technician"] = technician
+        appointment = Appointment.objects.create(**content)
         return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
 
 

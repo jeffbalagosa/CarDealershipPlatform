@@ -1,10 +1,13 @@
 import { useState } from "react";
+import dateTimeSubmitFormat from "./utils/DateTimeSubmitFormat";
 
 function AddAppointmentForm(props) {
   const [vin, setVIN] = useState("");
   const [customer, setCustomer] = useState("");
   const [time, setTime] = useState("");
   const [technician, setTechnician] = useState("");
+  const [date, setDate] = useState("");
+  const [reason, setReason] = useState("");
 
   const handleVINChange = (e) => {
     const value = e.target.value;
@@ -26,10 +29,51 @@ function AddAppointmentForm(props) {
     setTechnician(value);
   };
 
+  const handleDateChange = (e) => {
+    const value = e.target.value;
+    setDate(value);
+  };
+
+  const handleReasonChange = (e) => {
+    const value = e.target.value;
+    setReason(value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const dateTime = dateTimeSubmitFormat(date, time);
+
+    const data = {
+      vin: vin,
+      customer: customer,
+      technician: technician,
+      date_time: dateTime,
+    };
+
+    const appointmentUrl = "http://localhost:8080/api/appointments/";
+    const fetchOptions = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    const appointmentResponse = await fetch(appointmentUrl, fetchOptions);
+    if (appointmentResponse.ok) {
+      console.log("Appointment Added!");
+      setVIN("");
+      setCustomer("");
+      setTime("");
+      setTechnician("");
+      setDate("");
+      setReason("");
+    }
+  };
+
   return (
     <div className="card shadow m-5 p-3 col-6 mx-auto">
       <div className="card-body">
-        <form id="create-appointment-form">
+        <form onSubmit={handleSubmit} id="create-appointment-form">
           <h1 className="card-title">Add Service Appointment</h1>
           <div className="form-floating mb-3">
             <input
@@ -59,6 +103,8 @@ function AddAppointmentForm(props) {
           </div>
           <div className="form-floating mb-3">
             <input
+              onChange={handleDateChange}
+              value={date}
               placeholder="MM/DD/YYYY"
               required
               type="date"
@@ -88,11 +134,27 @@ function AddAppointmentForm(props) {
             >
               <option value="">Choose a Technician</option>
               {props.technicians.map((technician) => (
-                <option value={technician.id}>
+                <option
+                  key={technician.employee_id}
+                  value={technician.employee_id}
+                >
                   {technician.first_name} {technician.last_name}
                 </option>
               ))}
             </select>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+              onChange={handleReasonChange}
+              value={reason}
+              placeholder="Reason"
+              required
+              type="text"
+              name="reason"
+              id="reason"
+              className="form-control"
+            />
+            <label htmlFor="reason">Reason</label>
           </div>
           <button type="submit" className="btn btn-primary">
             Add Appointment

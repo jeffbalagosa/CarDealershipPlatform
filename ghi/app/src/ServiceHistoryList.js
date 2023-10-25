@@ -1,4 +1,4 @@
-import formatDateAndTime from "./utils/FormatDateTime";
+import frontEndDateAndTimeFormat from "./utils/FormatDateTime";
 import markAppointmentsAsVIP from "./utils/MarkAppointmentsAsVIP";
 import { useEffect, useState } from "react";
 
@@ -45,7 +45,7 @@ function ServiceHistoryList(props) {
         </thead>
         <tbody>
           {newAppointments.map((appointment) => {
-            const { formattedDate, formattedTime } = formatDateAndTime(
+            const { formattedDate, formattedTime } = frontEndDateAndTimeFormat(
               appointment.date_time
             );
             return (
