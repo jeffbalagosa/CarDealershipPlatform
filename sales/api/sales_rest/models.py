@@ -19,7 +19,7 @@ class Customer(models.Model):
 class Sale(models.Model):
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name="sales",
+        related_name="automobile",
         on_delete=models.CASCADE,
     )
     customer = models.ForeignKey(
