@@ -1,19 +1,6 @@
-function AppointmentList(props) {
-  // format date and time using the Date object for more readable display
-  const formatDateAndTime = (dateTimeStr) => {
-    const dateObj = new Date(dateTimeStr);
-    const formattedDate = dateObj.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-    const formattedTime = dateObj.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    return { formattedDate, formattedTime };
-  };
+import formatDateAndTime from "./utils/FormatDateTime";
 
+function AppointmentList(props) {
   // filter for new appointments so only those are displayed
   const newAppointments = props.appointments.filter(
     (appointment) => appointment.status === "created"
@@ -27,8 +14,8 @@ function AppointmentList(props) {
       headers: { "Content-Type": "application/json" },
     };
 
-    const hatsResponse = await fetch(finishUrl, fetchOptions);
-    if (hatsResponse.ok) {
+    const finishResponse = await fetch(finishUrl, fetchOptions);
+    if (finishResponse.ok) {
       console.log(`Appointment ${appointmentId} finished!`);
       window.location.assign("/appointments/list");
     }
@@ -42,8 +29,8 @@ function AppointmentList(props) {
       headers: { "Content-Type": "application/json" },
     };
 
-    const hatsResponse = await fetch(cancelUrl, fetchOptions);
-    if (hatsResponse.ok) {
+    const cancelResponse = await fetch(cancelUrl, fetchOptions);
+    if (cancelResponse.ok) {
       console.log(`Appointment ${appointmentId} cancelled!`);
       window.location.assign("/appointments/list");
     }
