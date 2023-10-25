@@ -102,5 +102,3 @@ function AppointmentList(props) {
 }
 
 export default AppointmentList;
-
-// TODO: Add VIP Status Column
