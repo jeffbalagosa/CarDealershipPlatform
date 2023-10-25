@@ -81,12 +81,17 @@ function Nav() {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/appointments/create">
+                Add Service Appointment
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/appointments/list">
                 Service Appointments
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments/history/list">
+              <NavLink className="nav-link" to="/appointments/history">
                 Service History
               </NavLink>
             </li>
