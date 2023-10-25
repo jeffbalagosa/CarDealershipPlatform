@@ -11,7 +11,6 @@ Team:
 - Run `docker volume create beta-data` from the root directory.
 - Run `docker-compose build` from the root directory.
 - Run `docker-compose` up from the root directory.
-- Open browser to http://localhost:3000/ to view the app's front end.
 
 ## Testing
 
@@ -25,7 +24,7 @@ Team:
 
 ### URLs and Ports
 
-- Put URLs and ports for services here
+- React Front-End: http://localhost:3000/
   ​
 
 ### Inventory API (Optional)
