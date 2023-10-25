@@ -11,12 +11,15 @@ Team:
 - Run `docker volume create beta-data` from the root directory.
 - Run `docker-compose build` from the root directory.
 - Run `docker-compose` up from the root directory.
+- Open browser to http://localhost:3000/ to view the app's front end.
 
 ## Testing
 
 - Files to fascilitate testing can be found in the [shared_resources/](./shared_resources/) directory.
 
 ## Diagram
+
+![Diagram](./shared_resources/model_diagram.png)
 
 ## API Documentation
 
