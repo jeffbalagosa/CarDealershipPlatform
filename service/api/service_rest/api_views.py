@@ -16,10 +16,10 @@ class AutomobileVOListEncoder(ModelEncoder):
 
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
-    properties = ["first_name", "last_name"]
+    properties = ["first_name", "last_name", "employee_id"]
 
     def get_extra_data(self, obj):
-        return {"employee_id": obj.id}
+        return {"system_id": obj.id}
 
 
 class AppointmentListEncoder(ModelEncoder):
@@ -80,9 +80,6 @@ def api_list_appointments(request):
             return JsonResponse({"message": "Technician does not exist."}, status=404)
 
         content["technician"] = technician
-        appointment = Appointment.objects.create(**content)
-        appointment.status = "created"
-        appointment.save()
         return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
 
 
