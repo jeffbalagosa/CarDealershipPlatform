@@ -1,20 +1,23 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainPage from "./MainPage";
-import Nav from "./Nav";
-import ManufacturerForm from "./ManufacturerForm";
-import ModelForm from "./ModelForm";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AppointmentList from "./AppointmentList";
 import AutomobileForm from "./AutomobileForm";
-import ManufacturerList from "./ManufacturerList";
-import { useState, useEffect } from "react";
-import SalespersonForm from "./SalespersonForm";
+import AutomobilesList from "./AutomobileList";
 import CustomerForm from "./CustomerForm";
 import CustomerList from "./CustomerList";
-import SalespersonList from "./SalespersonList";
+import MainPage from "./MainPage";
+import ManufacturerForm from "./ManufacturerForm";
+import ManufacturerList from "./ManufacturerList";
+import ModelForm from "./ModelForm";
 import ModelsList from "./ModelsList";
-import AutomobilesList from "./AutomobileList";
-import TechnicianList from "./TechnicianList";
-import AppointmentList from "./AppointmentList";
+import Nav from "./Nav";
+import SaleForm from "./SaleForm";
+import SalesList from "./SalesList";
+import SalespersonForm from "./SalespersonForm";
+import SalespersonHistory from "./SalespersonHistory";
+import SalespersonList from "./SalespersonList";
 import ServiceHistoryList from "./ServiceHistoryList";
+import TechnicianList from "./TechnicianList";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
@@ -24,6 +27,7 @@ function App() {
   const [autos, setAutos] = useState([]);
   const [technicians, setTechnicians] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [sales, setSales] = useState([]);
 
   async function loadTechnicians() {
     const url = "http://localhost:8080/api/technicians/";
@@ -92,6 +96,12 @@ function App() {
     setSalespersons(salespersons);
   }
 
+  async function loadSales() {
+    const response = await fetch("http://localhost:8090/api/sales/");
+    const { sales } = await response.json();
+    setSales(sales);
+  }
+
   useEffect(() => {
     loadCustomers();
     loadSalespersons();
@@ -100,6 +110,7 @@ function App() {
     loadAutos();
     loadTechnicians();
     loadAppointments();
+    loadSales();
   }, []);
 
   return (
@@ -151,6 +162,25 @@ function App() {
             <Route
               path="history/list"
               element={<ServiceHistoryList appointments={appointments} />}
+            />
+          </Route>
+          <Route path="sales">
+            <Route
+              path="create"
+              element={
+                <SaleForm
+                  customers={customers}
+                  salespersons={salespersons}
+                  autos={autos}
+                />
+              }
+            />
+            <Route path="list" element={<SalesList sales={sales} />} />
+            <Route
+              path="history"
+              element={
+                <SalespersonHistory sales={sales} salespersons={salespersons} />
+              }
             />
           </Route>
         </Routes>
