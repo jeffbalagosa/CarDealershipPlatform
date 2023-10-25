@@ -6,6 +6,7 @@ from .api_views import (
     appointment_detail,
     appointment_cancel,
     appointment_finish,
+    check_vin_in_inventory,
 )
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     path(
         "appointments/<int:pk>/finish/", appointment_finish, name="appointment_finish"
     ),
+    path("check_vin/<str:vin>/", check_vin_in_inventory, name="check_vin_in_inventory"),
 ]

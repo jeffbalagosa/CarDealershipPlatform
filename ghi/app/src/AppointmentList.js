@@ -1,10 +1,9 @@
 import formatDateAndTime from "./utils/FormatDateTime";
+import markAppointmentsAsVIP from "./utils/MarkAppointmentsAsVIP";
+import { useEffect, useState } from "react";
 
 function AppointmentList(props) {
-  // filter for new appointments so only those are displayed
-  const newAppointments = props.appointments.filter(
-    (appointment) => appointment.status === "created"
-  );
+  const [newAppointments, setNewAppointments] = useState([]);
 
   const handleFinish = async (event, appointmentId) => {
     event.preventDefault();
@@ -36,6 +35,20 @@ function AppointmentList(props) {
     }
   };
 
+  useEffect(() => {
+    const updateVIPStatus = async () => {
+      const updatedAppointments = await markAppointmentsAsVIP(
+        props.appointments
+      );
+      setNewAppointments(
+        // filter for new appointments so only those are displayed
+        updatedAppointments.filter((app) => app.status === "created")
+      );
+    };
+
+    updateVIPStatus();
+  }, [props.appointments]);
+
   return (
     <>
       <h1 className="mb-3 text-center">Service Appointments</h1>
@@ -43,6 +56,7 @@ function AppointmentList(props) {
         <thead>
           <tr>
             <th scope="col">VIN</th>
+            <th scope="col">Is VIP ?</th>
             <th scope="col">Customer</th>
             <th scope="col">Date</th>
             <th scope="col">Time</th>
@@ -58,6 +72,7 @@ function AppointmentList(props) {
             return (
               <tr key={appointment.id}>
                 <td>{appointment.vin}</td>
+                <td>{appointment.isVIP ? "Yes" : "No"}</td>
                 <td>{appointment.customer}</td>
                 <td>{formattedDate}</td>
                 <td>{formattedTime}</td>
