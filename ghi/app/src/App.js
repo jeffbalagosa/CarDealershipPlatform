@@ -13,6 +13,7 @@ import CustomerList from "./CustomerList";
 import SalespersonList from "./SalespersonList";
 import SaleForm from "./SaleForm";
 import SalesList from "./SalesList";
+import SalespersonHistory from "./SalespersonHistory";
 
 
 function App() {
@@ -101,6 +102,7 @@ function App() {
           <Route path='sales'>
             <Route path="create" element={<SaleForm customers={customers} salespersons={salespersons} autos = {autos}/>} />
             <Route path="list" element={<SalesList sales={sales} />} />
+            <Route path="history" element={<SalespersonHistory sales={sales} salespersons={salespersons} />} />
           </Route>
         </Routes>
       </div>
