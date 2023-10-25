@@ -1,27 +1,55 @@
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainPage from "./MainPage";
-import Nav from "./Nav";
-import ManufacturerForm from "./ManufacturerForm";
-import ModelForm from "./ModelForm";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AppointmentList from "./AppointmentList";
 import AutomobileForm from "./AutomobileForm";
-import ManufacturerList from "./ManufacturerList";
-import { useState, useEffect } from "react";
-import SalespersonForm from "./SalespersonForm";
+import AutomobilesList from "./AutomobileList";
 import CustomerForm from "./CustomerForm";
 import CustomerList from "./CustomerList";
-import SalespersonList from "./SalespersonList";
+import MainPage from "./MainPage";
+import ManufacturerForm from "./ManufacturerForm";
+import ManufacturerList from "./ManufacturerList";
+import ModelForm from "./ModelForm";
+import ModelsList from "./ModelsList";
+import Nav from "./Nav";
 import SaleForm from "./SaleForm";
 import SalesList from "./SalesList";
+import SalespersonForm from "./SalespersonForm";
 import SalespersonHistory from "./SalespersonHistory";
-
+import SalespersonList from "./SalespersonList";
+import ServiceHistoryList from "./ServiceHistoryList";
+import TechnicianList from "./TechnicianList";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [salespersons, setSalespersons] = useState([]);
+  const [models, setModels] = useState([]);
   const [autos, setAutos] = useState([]);
+  const [technicians, setTechnicians] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [sales, setSales] = useState([]);
+
+  async function loadTechnicians() {
+    const url = "http://localhost:8080/api/technicians/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const { technicians } = await response.json();
+      setTechnicians(technicians);
+    } else {
+      console.log("An error occurred fetching the data");
+    }
+  }
+
+  async function loadAppointments() {
+    const url = "http://localhost:8080/api/appointments/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const { appointments } = await response.json();
+      setAppointments(appointments);
+    } else {
+      console.log("An error occurred fetching the data");
+    }
+  }
 
   async function loadManufacturers() {
     const url = "http://localhost:8100/api/manufacturers/";
@@ -34,15 +62,28 @@ function App() {
     }
   }
 
-  async function loadAutos() {
-    const response = await fetch('http://localhost:8100/api/automobiles/');
-    const { autos } = await response.json();
-    if (response.ok){
-    setAutos(autos);
+  async function loadModels() {
+    const url = "http://localhost:8100/api/models/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const { models } = await response.json();
+      setModels(models);
     } else {
       console.log("An error occurred fetching the data");
     }
   }
+
+  async function loadAutos() {
+    const url = "http://localhost:8100/api/automobiles/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const { autos } = await response.json();
+      setAutos(autos);
+    } else {
+      console.log("An error occurred fetching the data");
+    }
+  }
+
   async function loadCustomers() {
     const response = await fetch("http://localhost:8090/api/customers/");
     const { customers } = await response.json();
@@ -74,11 +115,13 @@ function App() {
   useEffect(() => {
     loadCustomers();
     loadSalespersons();
-    loadAutos();
     loadManufacturers();
+    loadModels();
+    loadAutos();
+    loadTechnicians();
+    loadAppointments();
     loadSales();
-  }, [])
-
+  }, []);
 
   return (
     <BrowserRouter>
@@ -95,9 +138,11 @@ function App() {
           </Route>
           <Route path="models">
             <Route path="create" element={<ModelForm />} />
+            <Route path="list" element={<ModelsList models={models} />} />
           </Route>
           <Route path="automobiles">
             <Route path="create" element={<AutomobileForm />} />
+            <Route path="list" element={<AutomobilesList autos={autos} />} />
           </Route>
           <Route path="salespeople">
             <Route path="create" element={<SalespersonForm />} />
@@ -113,10 +158,40 @@ function App() {
               element={<CustomerList customers={customers} />}
             />
           </Route>
-          <Route path='sales'>
-            <Route path="create" element={<SaleForm customers={customers} salespersons={salespersons} autos = {autos}/>} />
+          <Route path="technicians">
+            <Route
+              path="list"
+              element={<TechnicianList technicians={technicians} />}
+            />
+          </Route>
+          <Route path="appointments">
+            <Route
+              path="list"
+              element={<AppointmentList appointments={appointments} />}
+            />
+            <Route
+              path="history/list"
+              element={<ServiceHistoryList appointments={appointments} />}
+            />
+          </Route>
+          <Route path="sales">
+            <Route
+              path="create"
+              element={
+                <SaleForm
+                  customers={customers}
+                  salespersons={salespersons}
+                  autos={autos}
+                />
+              }
+            />
             <Route path="list" element={<SalesList sales={sales} />} />
-            <Route path="history" element={<SalespersonHistory sales={sales} salespersons={salespersons} />} />
+            <Route
+              path="history"
+              element={
+                <SalespersonHistory sales={sales} salespersons={salespersons} />
+              }
+            />
           </Route>
         </Routes>
       </div>

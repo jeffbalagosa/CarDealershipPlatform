@@ -18,11 +18,13 @@ Team:
 
 ## Diagram
 
+![Diagram](./shared_resources/model_diagram.png)
+
 ## API Documentation
 
 ### URLs and Ports
 
-- Put URLs and ports for services here
+- React Front-End: http://localhost:3000/
   ​
 
 ### Inventory API (Optional)

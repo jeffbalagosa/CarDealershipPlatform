@@ -27,7 +27,7 @@ class AppointmentListEncoder(ModelEncoder):
     properties = ["id", "date_time", "reason", "status", "vin", "customer"]
 
     def get_extra_data(self, obj):
-        return {"technician": obj.technician.id}
+        return {"technician": f"{obj.technician.first_name} {obj.technician.last_name}"}
 
 
 @require_http_methods(["GET", "POST"])
@@ -116,3 +116,14 @@ def appointment_finish(request, pk):
         return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
     except Appointment.DoesNotExist:
         return JsonResponse({"message": "Appointment does not exist."}, status=404)
+
+
+# for VIP functionality in Appointment list and Histrory List components
+@require_http_methods(["GET"])
+def check_vin_in_inventory(request, vin):
+    try:
+        automobile = AutomobileVO.objects.get(vin=vin)
+        is_sold = automobile.sold
+        return JsonResponse({"exists": True, "sold": is_sold})
+    except AutomobileVO.DoesNotExist:
+        return JsonResponse({"exists": False, "sold": False})
