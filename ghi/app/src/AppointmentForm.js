@@ -1,4 +1,31 @@
+import { useState } from "react";
+
 function AddAppointmentForm(props) {
+  const [vin, setVIN] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [time, setTime] = useState("");
+  const [technician, setTechnician] = useState("");
+
+  const handleVINChange = (e) => {
+    const value = e.target.value;
+    setVIN(value);
+  };
+
+  const handleCustomerChange = (e) => {
+    const value = e.target.value;
+    setCustomer(value);
+  };
+
+  const handleTimeChange = (e) => {
+    const value = e.target.value;
+    setTime(value);
+  };
+
+  const handleTechnicianChange = (e) => {
+    const value = e.target.value;
+    setTechnician(value);
+  };
+
   return (
     <div className="card shadow m-5 p-3 col-6 mx-auto">
       <div className="card-body">
@@ -6,6 +33,8 @@ function AddAppointmentForm(props) {
           <h1 className="card-title">Add Service Appointment</h1>
           <div className="form-floating mb-3">
             <input
+              onChange={handleVINChange}
+              value={vin}
               placeholder="Automobile VIN"
               required
               type="text"
@@ -17,6 +46,8 @@ function AddAppointmentForm(props) {
           </div>
           <div className="form-floating mb-3">
             <input
+              onChange={handleCustomerChange}
+              value={customer}
               placeholder="Customer"
               required
               type="text"
@@ -39,6 +70,8 @@ function AddAppointmentForm(props) {
           </div>
           <div className="form-floating mb-3">
             <input
+              onChange={handleTimeChange}
+              value={time}
               required
               type="time"
               id="time"
@@ -48,7 +81,11 @@ function AddAppointmentForm(props) {
             <label htmlFor="time">Time</label>
           </div>
           <div className="form-floating mb-3">
-            <select className="form-select mb-3">
+            <select
+              onChange={handleTechnicianChange}
+              value={technician}
+              className="form-select mb-3"
+            >
               <option value="">Choose a Technician</option>
               {props.technicians.map((technician) => (
                 <option value={technician.id}>
