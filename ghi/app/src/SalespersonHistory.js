@@ -11,7 +11,7 @@ const handleSelectChange = (event) => {
   };
 
 
-console.log(filteredSales)
+
 
 
 

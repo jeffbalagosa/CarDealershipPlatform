@@ -26,6 +26,7 @@ const handleSubmit = async (event) => {
     setFirstName('');
     setLastName('');
     setEmployeeID('');
+    window.location.reload()
       }
     }
 

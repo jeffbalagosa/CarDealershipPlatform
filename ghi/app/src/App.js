@@ -37,24 +37,38 @@ function App() {
   async function loadAutos() {
     const response = await fetch('http://localhost:8100/api/automobiles/');
     const { autos } = await response.json();
+    if (response.ok){
     setAutos(autos);
+    } else {
+      console.log("An error occurred fetching the data");
+    }
   }
   async function loadCustomers() {
     const response = await fetch("http://localhost:8090/api/customers/");
     const { customers } = await response.json();
-    setCustomers(customers);
+    if (response.ok){
+      setCustomers(customers);
+      } else {
+        console.log("An error occurred fetching the data");
+    }
   }
-
   async function loadSalespersons() {
     const response = await fetch("http://localhost:8090/api/salespeople/");
     const { salespersons } = await response.json();
-    setSalespersons(salespersons);
+    if (response.ok){
+      setSalespersons(salespersons);
+      } else {
+        console.log("An error occurred fetching the data");
+    }
   }
-
   async function loadSales() {
     const response = await fetch("http://localhost:8090/api/sales/");
     const { sales } = await response.json();
-    setSales(sales);
+    if (response.ok){
+      setSales(sales);
+      } else {
+        console.log("An error occurred fetching the data");
+    }
   }
 
   useEffect(() => {

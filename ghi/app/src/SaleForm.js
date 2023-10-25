@@ -12,7 +12,7 @@ function SaleForm(props) {
     data.price = price;
 
     const saleUrl = 'http://localhost:8090/api/sales/';
-    const fetchConfig = {
+    const fetchData = {
       method: "post",
       body: JSON.stringify(data),
       headers: {
@@ -20,7 +20,18 @@ function SaleForm(props) {
       },
     };
 
-    const response = await fetch(saleUrl, fetchConfig);
+    const response = await fetch(saleUrl, fetchData);
+    if (response.ok) {
+      const soldUrl = `http://localhost:8100/api/automobiles/${automobile}/`;
+      const fetchConfig = {
+        method: "put",
+        body: JSON.stringify({'sold':true}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+    const response = await fetch(soldUrl, fetchConfig);
     if (response.ok) {
       const newSale = await response.json();
       console.log(newSale);
@@ -28,8 +39,10 @@ function SaleForm(props) {
       setSalesperson('');
       setAutomobile('');
       setPrice('');
+      window.location.reload()
     }
-  };
+  }
+};
   const [customer, setCustomer] = useState('')
   const handleCustomerChange = (event) => {
       const value = event.target.value;
@@ -50,7 +63,9 @@ function SaleForm(props) {
       const value = event.target.value;
       setPrice(value);
     }
-    console.log(props.autos)
+    const filteredAutos = props.autos.filter(((auto) => auto.sold === false))
+
+
   return (
     <div className="row">
       <div className="offset-3 col-6">
@@ -60,9 +75,9 @@ function SaleForm(props) {
             <div className="mb-3">
               <select onChange={handleAutomobileChange} value={automobile} required name="automobile" id="autmobile" className="form-select">
                 <option value="">Automobile VIN</option>
-                {props.autos.map(auto => {
+                {filteredAutos.map(auto => {
                   return (
-                    <option key={auto.id} value={auto.href}>
+                    <option key={auto.id} value={auto.vin}>
                       {auto.vin}
                     </option>
                   );

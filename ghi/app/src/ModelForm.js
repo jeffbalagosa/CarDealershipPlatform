@@ -27,6 +27,7 @@ const handleSubmit = async (event) => {
     setName('');
     setManufacturers('');
     setPictureUrl('');
+    window.location.reload()
       }
     }
   const [picture_url, setPictureUrl] = useState('')

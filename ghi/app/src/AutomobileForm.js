@@ -29,6 +29,7 @@ const handleSubmit = async (event) => {
     setYear('');
     setVin('');
     setModel('');
+    window.location.reload()
       }
     }
 

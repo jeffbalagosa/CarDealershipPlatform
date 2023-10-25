@@ -28,6 +28,7 @@ const handleSubmit = async (event) => {
     setLastName('');
     setAddress('');
     setPhoneNumber('');
+    window.location.reload()
       }
     }
 
@@ -106,7 +107,7 @@ return (
                 value={phone_number}
                 placeholder="phone_number"
                 required
-                type="tel"
+                type="text"
                 name="phone_number"
                 id="phone_number"
                 className="form-control"

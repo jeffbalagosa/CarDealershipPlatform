@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
+import requests
 
 class SalespersonEncoder(ModelEncoder):
     model = Salesperson
@@ -101,40 +102,38 @@ def list_sales(request):
         )
 
     else:
+
         content = json.loads(request.body)
+        customer_id = content["customer"]
+        salesperson_id = content["salesperson"]
+        vin = content["automobile"]
+
+
         try:
-            customer_id = content["customer"]
-            customer = Customer.objects.get(id = customer_id)
+            customer = Customer.objects.get(id=customer_id)
+            salesperson = Salesperson.objects.get(id=salesperson_id)
+            automobile = AutomobileVO.objects.get(vin=vin)
+
             content["customer"] = customer
-        except Customer.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid customer id"},
-                status=400,
-            )
-        try:
-            salesperson_id = content["salesperson"]
-            salesperson = Salesperson.objects.get(id = salesperson_id)
             content["salesperson"] = salesperson
-        except Salesperson.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid salesperson id"},
-                status=400,
-            )
-        try:
-            automobile_href = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_href = automobile_href)
             content["automobile"] = automobile
-        except AutomobileVO.DoesNotExist:
+
+        except (
+                Customer.DoesNotExist,
+                Salesperson.DoesNotExist,
+                AutomobileVO.DoesNotExist):
             return JsonResponse(
-                {"message": "Invalid automobile href"},
+                {"message": "Invalid customer ID, salesperson ID, or automobile VIN"},
                 status=400,
             )
+
         sale = Sale.objects.create(**content)
         return JsonResponse(
             sale,
             encoder=SaleEncoder,
             safe=False,
         )
+
 @require_http_methods(["DELETE", "GET"])
 def sales_detail(request, pk):
     if request.method == "GET":
