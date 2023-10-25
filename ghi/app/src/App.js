@@ -14,6 +14,7 @@ import ModelsList from "./ModelsList";
 import AutomobilesList from "./AutomobileList";
 import TechnicianList from "./TechnicianList";
 import AppointmentList from "./AppointmentList";
+import ServiceHistoryList from "./ServiceHistoryList";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
@@ -146,6 +147,10 @@ function App() {
             <Route
               path="list"
               element={<AppointmentList appointments={appointments} />}
+            />
+            <Route
+              path="history/list"
+              element={<ServiceHistoryList appointments={appointments} />}
             />
           </Route>
         </Routes>
