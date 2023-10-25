@@ -14,7 +14,7 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     address = models.CharField(max_length=200)
-    phone_number = models.IntegerField()
+    phone_number = models.CharField(max_length=15)
 
 class Sale(models.Model):
     automobile = models.ForeignKey(
@@ -34,4 +34,4 @@ class Sale(models.Model):
         on_delete=models.CASCADE,
     )
 
-    price = models.IntegerField()
+    price = models.CharField(max_length=200)
