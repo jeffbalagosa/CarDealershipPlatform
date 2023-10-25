@@ -18,6 +18,7 @@ import SalespersonHistory from "./SalespersonHistory";
 import SalespersonList from "./SalespersonList";
 import ServiceHistoryList from "./ServiceHistoryList";
 import TechnicianList from "./TechnicianList";
+import AddTechnicianForm from "./TechnicanForm";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
@@ -153,6 +154,7 @@ function App() {
               path="list"
               element={<TechnicianList technicians={technicians} />}
             />
+            <Route path="create" element={<AddTechnicianForm />} />
           </Route>
           <Route path="appointments">
             <Route
