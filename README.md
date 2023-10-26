@@ -31,7 +31,7 @@
 
 ### URLs and Ports
 
-**Front-End**
+**Inventory Front-End**
 
 - React Front-End: http://localhost:3000/
 - <details>
@@ -55,7 +55,29 @@
   - Create: http://localhost:3000/automobile/create
   </details>
 
-**Back-End**
+- <details>
+  <summary>Service:</summary>
+
+  - Technician List: http://localhost:3000/technicians/list
+  - Create Technician: http://localhost:3000/technicians/create
+  - Appointment List: http://localhost:3000/appointments/list
+  - Create Appointment: http://localhost:3000/appointments/create
+  - Appointment History List: http://localhost:3000/appointments/history
+  </details>
+
+- <details>
+  <summary>Sales:</summary>
+
+  - Salesperson List: http://localhost:3000/salespeople/list
+  - Create Salesperson: http://localhost:3000/salespeople/create
+  - Customer List: http://localhost:3000/customer/list
+  - Create Customer: http://localhost:3000/customer/create
+  - Sales List: http://localhost:3000/sales/list
+  - Create Sale: http://localhost:3000/sales/create
+  - Sales History List: http://localhost:3000/sales/history
+  </details>
+
+**Inventory Back-End**
 
 - <details>
   <summary>Manufacturers:</summary>
@@ -86,6 +108,8 @@
   - PUT request for updating individual automobiles: http://localhost:8100/api/automobiles/:vin/
   - GET request for showing individual automobiles: http://localhost:8100/api/automobiles/:vin/
   </details>
+
+- The back-end urls and ports for the **Service** and **Sales** microservices are included in the Insomnia Exports of the [shared_resources/](./shared_resources/) folder.
 
 ### Inventory API (Optional)
 
@@ -123,8 +147,6 @@
 - `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
 - `get_api_url()`: to generate the href.
 </details>
-
-#### Views
 
 ### Sales API
 
@@ -166,24 +188,36 @@ The sales microservice consists of 4 models :
 - `automobile` : foreign key, uses the AutomobileVO model to pull individual cars from inventory and assign them to a sale.
 </details>
 
-
 ### Functionality
-
 
 <details>
 <summary> Sales API functionality </summary>
 
-  The way this API works is that a Sale is recorded by providing a Customer and Salesperson and an UNSOLD Automobile(identified by its VIN).
+The way this API works is that a Sale is recorded by providing a Customer and Salesperson and an UNSOLD Automobile(identified by its VIN).
 
-  The automobile is sold for a listed price and the sale is then recorded.
+The automobile is sold for a listed price and the sale is then recorded.
 
-  The unsold automobile is listed as SOLD and is no longer available for sale.
+The unsold automobile is listed as SOLD and is no longer available for sale.
 
-  The history of the sale is then provided in a list and can also be accessed by individual salesperson history.
+The history of the sale is then provided in a list and can also be accessed by individual salesperson history.
 
-  If needed, you can create a new customer or salesperson using the forms provided.
+If needed, you can create a new customer or salesperson using the forms provided.
 
-  If you wish to create a customer,salesperson, or sale, without using the provided forms feel free to utilize the insomnia requests provided in the shared resources folder under "doruk_sales".
+If you wish to create a customer,salesperson, or sale, without using the provided forms feel free to utilize the insomnia requests provided in the shared resources folder under "doruk_sales".
+
+</details>
+
+<details>
+<summary> Service API functionality </summary>
+
+- The form to add a technician is straight forward, each field has change handlers to update state dynamically.
+- Clicking the **Add Technician** initiates the **POST** request.
+- I added a success message upon recieving a good response. The view functions also include `404` responses for failures.
+- The form to add an appointment has a list dropdown for technicians populated by the database.
+- The Appointments list has functionality to either _cancel_ or _finish_ appointments via button click. The list is dynamically filtered for new (aka _created_ status) appointments. As you click, they are removed from the appointment list.
+- The Appointment history list, keeps track of all appointments regardless of status. You can search by vin to filter out specific appointments.
+- Both lists show VIP status of each appointment. VIP status is flagged if the car's VIN is in our inventory database with the status of **sold**.
+
 </details>
 
 ## Value Objects
