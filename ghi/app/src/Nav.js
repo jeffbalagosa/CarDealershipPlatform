@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-success text-center">
       <div className="container-fluid">
         <NavLink
           className="m-2 text-decoration-none shadow bg-dark rounded"
@@ -94,13 +94,13 @@ function Nav() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments/create">
-                Add Service Appointment
+              <NavLink className="nav-link" to="/appointments/list">
+                Service Appointments
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments/list">
-                Service Appointments
+              <NavLink className="nav-link" to="/appointments/create">
+                Add Service Appointment
               </NavLink>
             </li>
             <li className="nav-item">
