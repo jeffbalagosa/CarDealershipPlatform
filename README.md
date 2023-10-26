@@ -183,4 +183,4 @@ The sales microservice consists of 4 models :
 
 ## Value Objects
 
-- Sales API Value Object - Automobile: A Value object that gets the data from the automobiles in the inventory, this is done via a poller that pulls data every 60 seconds.
+Value Object - Automobile: A Value object that gets the data from the automobiles in the inventory, this is done via a poller that pulls data every 60 seconds.
