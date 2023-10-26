@@ -85,8 +85,25 @@
 
 ### Sales API
 
-- Put Sales API documentation here
+- The sales microservice consists of 4 models :
+  1. AutomobileVO : A Value object that gets the data from the automobiles in the inventory, this is done via a poller that pulls data every 60 seconds.
+     The properties that this object contains are the "import_href", "vin", and "sold" status.
+  2. Customer : A simple model that has First and Last name properties, as well as an address and phone number.
+  3. Salesperson: Another straightforward model containing First and Last names, addtionally a employee id which is an integer.
+  4. Sale : This model has its own "price" property but then usses the AutomobileVO's vin, as well as Customer and Salesperson models.
+
+  The way this API works is that a Sale is recorded by providing a Customer and Salesperson and an UNSOLD Automobile(identified by its VIN).
+
+  The automobile is sold for a listed price and the sale is then recorded.
+
+  The unsold automobile is listed as SOLD and is no longer available for sale.
+
+  The history of the sale is then provided in a list and can also be accessed by individual salesperson history.
+
+  If needed, you can create a new customer or salesperson using the forms provided.
+
+  If you wish to create a customer,salesperson, or sale, without using the provided forms feel free to utilize the insomnia requests provided in the shared resources folder under "doruk_sales".
 
 ## Value Objects
 
-- Identification of value objects for each service goes here
+- Sales API Value Object - Automobile: A Value object that gets the data from the automobiles in the inventory, this is done via a poller that pulls data every 60 seconds.
