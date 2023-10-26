@@ -165,7 +165,10 @@ function App() {
               path="list"
               element={<TechnicianList technicians={technicians} />}
             />
-            <Route path="create" element={<AddTechnicianForm />} />
+            <Route
+              path="create"
+              element={<AddTechnicianForm loadTechnicians={loadTechnicians} />}
+            />
           </Route>
           <Route path="appointments">
             <Route

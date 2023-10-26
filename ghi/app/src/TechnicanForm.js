@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function AddTechnicianForm() {
+function AddTechnicianForm(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [employeeId, setEmployeeID] = useState("");
@@ -47,6 +47,7 @@ function AddTechnicianForm() {
       setLastName("");
       setEmployeeID("");
       setHasSubmitted(true);
+      props.loadTechnicians();
     }
   };
 
