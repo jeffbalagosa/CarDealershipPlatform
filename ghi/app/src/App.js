@@ -18,6 +18,8 @@ import SalespersonHistory from "./SalespersonHistory";
 import SalespersonList from "./SalespersonList";
 import ServiceHistoryList from "./ServiceHistoryList";
 import TechnicianList from "./TechnicianList";
+import AddTechnicianForm from "./TechnicanForm";
+import AddAppointmentForm from "./AppointmentForm";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
@@ -87,28 +89,28 @@ function App() {
   async function loadCustomers() {
     const response = await fetch("http://localhost:8090/api/customers/");
     const { customers } = await response.json();
-    if (response.ok){
+    if (response.ok) {
       setCustomers(customers);
-      } else {
-        console.log("An error occurred fetching the data");
+    } else {
+      console.log("An error occurred fetching the data");
     }
   }
   async function loadSalespersons() {
     const response = await fetch("http://localhost:8090/api/salespeople/");
     const { salespersons } = await response.json();
-    if (response.ok){
+    if (response.ok) {
       setSalespersons(salespersons);
-      } else {
-        console.log("An error occurred fetching the data");
+    } else {
+      console.log("An error occurred fetching the data");
     }
   }
   async function loadSales() {
     const response = await fetch("http://localhost:8090/api/sales/");
     const { sales } = await response.json();
-    if (response.ok){
+    if (response.ok) {
       setSales(sales);
-      } else {
-        console.log("An error occurred fetching the data");
+    } else {
+      console.log("An error occurred fetching the data");
     }
   }
 
@@ -163,6 +165,7 @@ function App() {
               path="list"
               element={<TechnicianList technicians={technicians} />}
             />
+            <Route path="create" element={<AddTechnicianForm />} />
           </Route>
           <Route path="appointments">
             <Route
@@ -170,7 +173,17 @@ function App() {
               element={<AppointmentList appointments={appointments} />}
             />
             <Route
-              path="history/list"
+              path="create"
+              element={
+                <AddAppointmentForm
+                  technicians={technicians}
+                  loadAppointments={loadAppointments}
+                />
+              }
+            />
+
+            <Route
+              path="history"
               element={<ServiceHistoryList appointments={appointments} />}
             />
           </Route>

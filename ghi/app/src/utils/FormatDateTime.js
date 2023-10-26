@@ -1,4 +1,5 @@
-const formatDateAndTime = (dateTimeStr) => {
+// format date time into two separate user friendly strings for display on the front end
+const frontEndDateAndTimeFormat = (dateTimeStr) => {
   const dateObj = new Date(dateTimeStr);
   const formattedDate = dateObj.toLocaleDateString("en-US", {
     year: "numeric",
@@ -12,4 +13,4 @@ const formatDateAndTime = (dateTimeStr) => {
   return { formattedDate, formattedTime };
 };
 
-export default formatDateAndTime;
+export default frontEndDateAndTimeFormat;

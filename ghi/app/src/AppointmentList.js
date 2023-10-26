@@ -1,4 +1,4 @@
-import formatDateAndTime from "./utils/FormatDateTime";
+import frontEndDateAndTimeFormat from "./utils/FormatDateTime";
 import markAppointmentsAsVIP from "./utils/MarkAppointmentsAsVIP";
 import { useEffect, useState } from "react";
 
@@ -66,7 +66,7 @@ function AppointmentList(props) {
         </thead>
         <tbody>
           {newAppointments.map((appointment) => {
-            const { formattedDate, formattedTime } = formatDateAndTime(
+            const { formattedDate, formattedTime } = frontEndDateAndTimeFormat(
               appointment.date_time
             );
             return (
@@ -102,5 +102,3 @@ function AppointmentList(props) {
 }
 
 export default AppointmentList;
-
-// TODO: Add VIP Status Column
