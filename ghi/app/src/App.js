@@ -165,12 +165,20 @@ function App() {
               path="list"
               element={<TechnicianList technicians={technicians} />}
             />
-            <Route path="create" element={<AddTechnicianForm />} />
+            <Route
+              path="create"
+              element={<AddTechnicianForm loadTechnicians={loadTechnicians} />}
+            />
           </Route>
           <Route path="appointments">
             <Route
               path="list"
-              element={<AppointmentList appointments={appointments} />}
+              element={
+                <AppointmentList
+                  appointments={appointments}
+                  loadAppointments={loadAppointments}
+                />
+              }
             />
             <Route
               path="create"

@@ -45,35 +45,44 @@
   - List: http://localhost:3000/model/list
   - Create: http://localhost:3000/model/create
 
-- Automobiles:
+- <details>
+  <summary>Automobiles:</summary>
+
   - List: http://localhost:3000/automobile/list
   - Create: http://localhost:3000/automobile/create
+  <details>
 
 **Back-End**
 
-- Manufacturers:
+- <details>
+  <summary>Manufacturers:</summary>
 
   - GET request for list of manufacturers: http://localhost:8100/api/manufacturers/
   - POST request to add manufacturer: http://localhost:8100/api/manufacturers/
   - DELETE request for individual manufacturer: http://localhost:8100/api/manufacturers/:id/
   - PUT request for updating individual manufacturer: http://localhost:8100/api/manufacturers/:id/
   - GET request for showing individual manufacturer: http://localhost:8100/api/manufacturers/:id/
+  </details>
 
-- Models:
+- <details>
+  <summary>Models:</summary>
 
   - GET request for list of models: http://localhost:8100/api/models/
   - POST request to add models: http://localhost:8100/api/models/
   - DELETE request for individual models: http://localhost:8100/api/models/:id/
   - PUT request for updating individual models: http://localhost:8100/api/models/:id/
   - GET request for showing individual models: http://localhost:8100/api/models/:id/
+  </details>
 
-- Automobiles:
+- <details>
+  <summary>Automobiles:</summary>
 
   - GET request for list of automobiles: http://localhost:8100/api/automobiles/
   - POST request to add automobiles: http://localhost:8100/api/automobiles/
   - DELETE request for individual automobiles: http://localhost:8100/api/automobiles/:vin/
   - PUT request for updating individual automobiles: http://localhost:8100/api/automobiles/:vin/
   - GET request for showing individual automobiles: http://localhost:8100/api/automobiles/:vin/
+  </details>
 
 ### Inventory API (Optional)
 
@@ -81,7 +90,36 @@
 
 ### Service API
 
-- Put Service API documentation here
+#### Models
+
+<details>
+<summary>AutomobileVO:</summary>
+
+- `import_href`: Didn't really need to use this, but handy to have there in case I did.
+- `vin`: Primarily used to determin VIP Status of Customers.
+- `sold`: Also, primarily used to determin VIP Status of Customers.
+</details>
+
+<details>
+<summary>Technician:</summary>
+
+- `first_name`: Standard character field. If I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
+- `last_name`: Standard character field. Same as above, if I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
+- `employee_id`: Standard character field. Per project specs, it needs to be there, but I think a better way would be to reference the auto generated database `id`. Less manual entry for the user, numbers would be sequential and unique
+- `get_api_url()`: to generate the href
+</details>
+
+<details>
+<summary>Appointment:</summary>
+
+- `date_time`: utilized Django's `DateTimeField()` for obvious reasons. Formatting to and from front end was an interesting challenge.
+- `reason`: made this a text field because reason entrieas could potentially be in paragraph form.
+- `status`: I considered making this its own model to make **created**, **finished**, and **cancelled** its own properties. But kept it simple.
+- `vin`: Separate entry from the VO vin. Mainly used to identify VIP status, search, and keep track of customer history.
+- `customer`: Standard `Charfield()`. Specs didn't specify a separate first_name and last_name property. Didn't think it was required for this use case either.
+- `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
+- `get_api_url()`: to generate the href
+</details>
 
 ### Sales API
 
