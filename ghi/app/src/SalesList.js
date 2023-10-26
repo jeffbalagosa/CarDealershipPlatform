@@ -20,7 +20,7 @@ function SalesList({ sales }) {
                             <td>{sale.salesperson.first_name} {sale.salesperson.last_name}</td>
                             <td>{sale.customer.first_name} {sale.customer.last_name}</td>
                             <td>{sale.automobile.vin}</td>
-                            <td>${sale.price}</td>
+                            <td>{sale.price}</td>
                         </tr>
                     )
                 })}

@@ -22,17 +22,6 @@ function SaleForm(props) {
 
     const response = await fetch(saleUrl, fetchData);
     if (response.ok) {
-      const soldUrl = `http://localhost:8100/api/automobiles/${automobile}/`;
-      const fetchConfig = {
-        method: "put",
-        body: JSON.stringify({'sold':true}),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-    const response = await fetch(soldUrl, fetchConfig);
-    if (response.ok) {
       const newSale = await response.json();
       console.log(newSale);
       setCustomer('');
@@ -42,7 +31,7 @@ function SaleForm(props) {
       window.location.reload()
     }
   }
-};
+;
   const [customer, setCustomer] = useState('')
   const handleCustomerChange = (event) => {
       const value = event.target.value;
