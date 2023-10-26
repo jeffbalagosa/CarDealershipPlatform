@@ -16,7 +16,7 @@ function AppointmentList(props) {
     const finishResponse = await fetch(finishUrl, fetchOptions);
     if (finishResponse.ok) {
       console.log(`Appointment ${appointmentId} finished!`);
-      window.location.assign("/appointments/list");
+      props.loadAppointments();
     }
   };
 
@@ -31,7 +31,7 @@ function AppointmentList(props) {
     const cancelResponse = await fetch(cancelUrl, fetchOptions);
     if (cancelResponse.ok) {
       console.log(`Appointment ${appointmentId} cancelled!`);
-      window.location.assign("/appointments/list");
+      props.loadAppointments();
     }
   };
 
