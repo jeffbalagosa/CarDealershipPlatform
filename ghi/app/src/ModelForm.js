@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function ModelForm() {
+function ModelForm(props) {
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -27,7 +27,7 @@ const handleSubmit = async (event) => {
     setName('');
     setManufacturers('');
     setPictureUrl('');
-    window.location.reload()
+    props.loadModels()
       }
     }
   const [picture_url, setPictureUrl] = useState('')

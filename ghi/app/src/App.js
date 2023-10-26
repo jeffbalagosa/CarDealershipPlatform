@@ -132,29 +132,29 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturer">
-            <Route path="create" element={<ManufacturerForm />} />
+            <Route path="create" element={<ManufacturerForm loadManufacturers = { loadManufacturers }/>} />
             <Route
               path="list"
               element={<ManufacturerList manufacturers={manufacturers} />}
             />
           </Route>
           <Route path="models">
-            <Route path="create" element={<ModelForm />} />
+            <Route path="create" element={<ModelForm loadModels = { loadModels }/>} />
             <Route path="list" element={<ModelsList models={models} />} />
           </Route>
           <Route path="automobiles">
-            <Route path="create" element={<AutomobileForm />} />
+            <Route path="create" element={<AutomobileForm loadAutos = { loadAutos } />} />
             <Route path="list" element={<AutomobilesList autos={autos} />} />
           </Route>
           <Route path="salespeople">
-            <Route path="create" element={<SalespersonForm />} />
+            <Route path="create" element={<SalespersonForm loadSalespersons = { loadSalespersons }/>} />
             <Route
               path="list"
               element={<SalespersonList salespersons={salespersons} />}
             />
           </Route>
           <Route path="customers">
-            <Route path="create" element={<CustomerForm />} />
+            <Route path="create" element={<CustomerForm loadCustomers = { loadCustomers }/>} />
             <Route
               path="list"
               element={<CustomerList customers={customers} />}
@@ -195,6 +195,7 @@ function App() {
                   customers={customers}
                   salespersons={salespersons}
                   autos={autos}
+                  loadSales = {loadSales}
                 />
               }
             />
