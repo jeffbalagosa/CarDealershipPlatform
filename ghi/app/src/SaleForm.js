@@ -28,7 +28,7 @@ function SaleForm(props) {
       setSalesperson('');
       setAutomobile('');
       setPrice('');
-      window.location.reload()
+      props.loadSales()
     }
   }
 ;

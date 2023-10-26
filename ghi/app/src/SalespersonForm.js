@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function SalespersonForm() {
+function SalespersonForm(props) {
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -26,7 +26,7 @@ const handleSubmit = async (event) => {
     setFirstName('');
     setLastName('');
     setEmployeeID('');
-    window.location.reload()
+    props.loadSalespersons()
       }
     }
 

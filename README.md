@@ -128,8 +128,64 @@
 
 ### Sales API
 
-- Put Sales API documentation here
+The sales microservice consists of 4 models :
+
+<details>
+<summary> AutomobileVO </summary>
+  A Value object that gets the data from the automobiles in the inventory, this is done via a poller that pulls data every 60 seconds.
+  The properties that this object contains are the "import_href", "vin", and "sold" status.
+
+- `import_href` : unique href for each automobile, not utilized but can be useful
+- `vin` : unique Vehicle Identification Number, used to determine each unique automobile for sales
+- `sold` : A simple boolean field to determine if a automobile had been sold or not.
+</details>
+
+<details>
+<summary> Customer </summary>
+
+- `first_name` : CharField, self-explanatory
+- `last_name` : CharField, self-explanatory
+- `address` : CharField, takes any text, need to filter it for proper formatting in future
+- `phone_number` : CharField, takes max length of 15 for international numbers or if people use hyphens or brackets or + symbols
+</details>
+
+<details>
+<summary> Salesperson </summary>
+
+- `first_name` : CharField, self-explanatory
+- `last_name` : CharField, self-explanatory
+- `employee_id` : Unique positive integer field, identifies each Salesperson with a unique number
+</details>
+
+<details>
+<summary> Sale </summary>
+
+- `price` : CharField, so currency symbols and decimels can be used
+- `salesperson` : foreign key, uses the salesperson model to assign a salesperson for each individual sale
+- `customer` : foreign key, uses the customer model to assign a customer for each individual sale
+- `automobile` : foreign key, uses the AutomobileVO model to pull individual cars from inventory and assign them to a sale.
+</details>
+
+
+### Functionality
+
+
+<details>
+<summary> Sales API functionality </summary>
+
+  The way this API works is that a Sale is recorded by providing a Customer and Salesperson and an UNSOLD Automobile(identified by its VIN).
+
+  The automobile is sold for a listed price and the sale is then recorded.
+
+  The unsold automobile is listed as SOLD and is no longer available for sale.
+
+  The history of the sale is then provided in a list and can also be accessed by individual salesperson history.
+
+  If needed, you can create a new customer or salesperson using the forms provided.
+
+  If you wish to create a customer,salesperson, or sale, without using the provided forms feel free to utilize the insomnia requests provided in the shared resources folder under "doruk_sales".
+</details>
 
 ## Value Objects
 
-- Identification of value objects for each service goes here
+Value Object - Automobile: A Value object that gets the data from the automobiles in the inventory, this is done via a poller that pulls data every 60 seconds.

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function AutomobileForm() {
+function AutomobileForm(props) {
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -29,7 +29,7 @@ const handleSubmit = async (event) => {
     setYear('');
     setVin('');
     setModel('');
-    window.location.reload()
+    props.loadAutos()
       }
     }
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function CustomerForm() {
+function CustomerForm(props) {
 
 const handleSubmit = async (event) => {
   event.preventDefault();
@@ -28,7 +28,7 @@ const handleSubmit = async (event) => {
     setLastName('');
     setAddress('');
     setPhoneNumber('');
-    window.location.reload()
+    props.loadCustomers()
       }
     }
 
