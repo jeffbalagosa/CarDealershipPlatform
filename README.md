@@ -1,13 +1,13 @@
 # CarCar
 
-Team:
+## Team:
 
 - Jeff Balagosa
   - Service Microservice
-  - Front-End list components for Inventory Microservice.
+  - Front-end **list** components for Inventory Microservice.
 - Doruk Hacioglu
   - Sales Microservice
-  - Front-End Form components for Inventory Microservice
+  - Front-end **form** components for Inventory Microservice.
 
 ## How to run this app
 
