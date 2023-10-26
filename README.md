@@ -34,23 +34,26 @@
 **Front-End**
 
 - React Front-End: http://localhost:3000/
-
-- Manufacturers:
+- <details>
+  <summary>Manufacturers:</summary>
 
   - List: http://localhost:3000/manufacturer/list
   - Create: http://localhost:3000/manufacturer/create
+  </details>
 
-- Models:
+- <details>
+  <summary>Models:</summary>
 
   - List: http://localhost:3000/model/list
   - Create: http://localhost:3000/model/create
+  </details>
 
 - <details>
   <summary>Automobiles:</summary>
 
   - List: http://localhost:3000/automobile/list
   - Create: http://localhost:3000/automobile/create
-  <details>
+  </details>
 
 **Back-End**
 
@@ -120,6 +123,8 @@
 - `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
 - `get_api_url()`: to generate the href
 </details>
+
+#### Views
 
 ### Sales API
 
