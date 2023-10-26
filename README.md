@@ -109,7 +109,7 @@
 - `first_name`: Standard character field. If I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
 - `last_name`: Standard character field. Same as above, if I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
 - `employee_id`: Standard character field. Per project specs, it needs to be there, but I think a better way would be to reference the auto generated database `id`. Less manual entry for the user, numbers would be sequential and unique
-- `get_api_url()`: to generate the href
+- `get_api_url()`: to generate the href.
 </details>
 
 <details>
@@ -121,7 +121,7 @@
 - `vin`: Separate entry from the VO vin. Mainly used to identify VIP status, search, and keep track of customer history.
 - `customer`: Standard `Charfield()`. Specs didn't specify a separate first_name and last_name property. Didn't think it was required for this use case either.
 - `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
-- `get_api_url()`: to generate the href
+- `get_api_url()`: to generate the href.
 </details>
 
 #### Views
