@@ -49,6 +49,7 @@ function AddAppointmentForm(props) {
       customer: customer,
       technician: technician,
       date_time: dateTime,
+      reason: reason,
     };
 
     const appointmentUrl = "http://localhost:8080/api/appointments/";
@@ -67,6 +68,7 @@ function AddAppointmentForm(props) {
       setTechnician("");
       setDate("");
       setReason("");
+      props.loadAppointments();
     }
   };
 
