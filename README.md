@@ -2,8 +2,12 @@
 
 Team:
 
-- Jeff Balagosa - Service Microservice
-- Doruk Hacioglu - Sales Microservice
+- Jeff Balagosa
+  - Service Microservice
+  - Front-End list components for Inventory Microservice.
+- Doruk Hacioglu
+  - Sales Microservice
+  - Front-End Form components for Inventory Microservice
 
 ## How to run this app
 
@@ -16,6 +20,8 @@ Team:
 ## Testing
 
 - Files to fascilitate testing can be found in the [shared_resources/](./shared_resources/) directory.
+  - There you will find insomnia exports.
+  - Testing guides with sample data inputs.
 
 ## Diagram
 
