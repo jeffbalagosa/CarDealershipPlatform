@@ -4,9 +4,19 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">
-          CarCar
+        <NavLink
+          className="m-2 text-decoration-none shadow bg-dark rounded"
+          to="/"
+        >
+          <img
+            src="/rsz_car_logo.png"
+            alt="logo"
+            className="rounded-circle m-0 p-0"
+            style={{ height: "75px" }}
+          />
+          <div className="m-0 p-0 navbar-brand text-center">CarCar</div>
         </NavLink>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -18,7 +28,10 @@ function Nav() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          className="collapse navbar-collapse justify-content-between"
+          id="navbarSupportedContent"
+        >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink className="nav-link" to="/manufacturer/list">
