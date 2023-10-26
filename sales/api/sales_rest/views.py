@@ -128,11 +128,21 @@ def list_sales(request):
             )
 
         sale = Sale.objects.create(**content)
-        return JsonResponse(
+
+        try:
+            response = requests.put(f"http://inventory-api:8000/api/automobiles/{automobile.vin}/", json={'sold': True})
+            response.raise_for_status()
+            return JsonResponse(
             sale,
             encoder=SaleEncoder,
             safe=False,
         )
+        except requests.exceptions.RequestException as e:
+            return JsonResponse(
+                {"message": f"Error connecting to the inventory API: {e}"},
+                status=500,
+            )
+
 
 @require_http_methods(["DELETE", "GET"])
 def sales_detail(request, pk):
