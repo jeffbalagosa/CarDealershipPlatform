@@ -204,6 +204,7 @@ function App() {
                   salespersons={salespersons}
                   autos={autos}
                   loadSales = {loadSales}
+                  loadAutos = {loadAutos}
                 />
               }
             />

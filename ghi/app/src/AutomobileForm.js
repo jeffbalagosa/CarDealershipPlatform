@@ -105,7 +105,7 @@ placeholder="color" required
               <option  value="">Choose a model</option>
               {models.map(model => {
                 return (
-                    <option key={model.name} value={model.id}>
+                    <option key={model.id} value={model.id}>
                     {model.name}
                   </option>
                 );
