@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AddAppointmentForm from "./AppointmentForm";
 import AppointmentList from "./AppointmentList";
 import AutomobileForm from "./AutomobileForm";
 import AutomobilesList from "./AutomobileList";
@@ -17,9 +18,8 @@ import SalespersonForm from "./SalespersonForm";
 import SalespersonHistory from "./SalespersonHistory";
 import SalespersonList from "./SalespersonList";
 import ServiceHistoryList from "./ServiceHistoryList";
-import TechnicianList from "./TechnicianList";
 import AddTechnicianForm from "./TechnicanForm";
-import AddAppointmentForm from "./AppointmentForm";
+import TechnicianList from "./TechnicianList";
 
 function App() {
   const [manufacturers, setManufacturers] = useState([]);
@@ -132,29 +132,46 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturer">
-            <Route path="create" element={<ManufacturerForm loadManufacturers = { loadManufacturers }/>} />
+            <Route
+              path="create"
+              element={
+                <ManufacturerForm loadManufacturers={loadManufacturers} />
+              }
+            />
             <Route
               path="list"
               element={<ManufacturerList manufacturers={manufacturers} />}
             />
           </Route>
           <Route path="models">
-            <Route path="create" element={<ModelForm loadModels = { loadModels }/>} />
+            <Route
+              path="create"
+              element={<ModelForm loadModels={loadModels} />}
+            />
             <Route path="list" element={<ModelsList models={models} />} />
           </Route>
           <Route path="automobiles">
-            <Route path="create" element={<AutomobileForm loadAutos = { loadAutos } />} />
+            <Route
+              path="create"
+              element={<AutomobileForm loadAutos={loadAutos} />}
+            />
             <Route path="list" element={<AutomobilesList autos={autos} />} />
           </Route>
           <Route path="salespeople">
-            <Route path="create" element={<SalespersonForm loadSalespersons = { loadSalespersons }/>} />
+            <Route
+              path="create"
+              element={<SalespersonForm loadSalespersons={loadSalespersons} />}
+            />
             <Route
               path="list"
               element={<SalespersonList salespersons={salespersons} />}
             />
           </Route>
           <Route path="customers">
-            <Route path="create" element={<CustomerForm loadCustomers = { loadCustomers }/>} />
+            <Route
+              path="create"
+              element={<CustomerForm loadCustomers={loadCustomers} />}
+            />
             <Route
               path="list"
               element={<CustomerList customers={customers} />}
@@ -203,7 +220,7 @@ function App() {
                   customers={customers}
                   salespersons={salespersons}
                   autos={autos}
-                  loadSales = {loadSales}
+                  loadSales={loadSales}
                 />
               }
             />

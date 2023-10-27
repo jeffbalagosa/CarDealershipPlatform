@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import frontEndDateAndTimeFormat from "./utils/FormatDateTime";
 import markAppointmentsAsVIP from "./utils/MarkAppointmentsAsVIP";
-import { useEffect, useState } from "react";
 
 function ServiceHistoryList(props) {
   const [newAppointments, setNewAppointments] = useState([]);
