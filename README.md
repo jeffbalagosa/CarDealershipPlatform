@@ -31,9 +31,10 @@
 
 ### URLs and Ports
 
+- React Front-End: http://localhost:3000/
+
 **Inventory Front-End**
 
-- React Front-End: http://localhost:3000/
 - <details>
   <summary>Manufacturers:</summary>
 
@@ -54,6 +55,8 @@
   - List: http://localhost:3000/automobile/list
   - Create: http://localhost:3000/automobile/create
   </details>
+
+**Service and Sales Front-End**
 
 - <details>
   <summary>Service:</summary>
@@ -110,10 +113,6 @@
   </details>
 
 - The back-end urls and ports for the **Service** and **Sales** microservices are included in the Insomnia Exports of the [shared_resources/](./shared_resources/) folder.
-
-### Inventory API (Optional)
-
-- Put Inventory API documentation here. This is optional if you have time, otherwise prioritize the other services.
 
 ### Service API
 
