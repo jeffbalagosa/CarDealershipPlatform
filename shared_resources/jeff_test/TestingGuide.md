@@ -26,7 +26,7 @@ To help ease the pain of setting up the URLs to test the API enpoints. Feel free
 
 ### Service Appointments
 
-Keep in mind that the technician id is a foreign key to the technicians table. So you will need to create a technician first.
+Keep in mind that `technician` is a foreign key to the technicians table. So you will need to create a technician first.
 
 ```JSON
     {
