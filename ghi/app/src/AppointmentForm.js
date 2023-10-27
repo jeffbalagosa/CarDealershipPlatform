@@ -147,7 +147,7 @@ function AddAppointmentForm(props) {
                 {props.technicians.map((technician) => (
                   <option
                     key={technician.employee_id}
-                    value={technician.employee_id}
+                    value={technician.system_id}
                   >
                     {technician.first_name} {technician.last_name}
                   </option>
