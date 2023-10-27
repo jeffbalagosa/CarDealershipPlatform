@@ -178,7 +178,7 @@ function AddAppointmentForm(props) {
           hasSubmitted ? "alert alert-success p-2 col-6 mx-auto" : "d-none"
         }
       >
-        <p className="h3 text-center">Technician Successfully Added!</p>
+        <p className="h3 text-center">Appointment Successfully Added!</p>
       </div>
     </>
   );
