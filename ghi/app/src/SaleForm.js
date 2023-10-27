@@ -29,6 +29,7 @@ function SaleForm(props) {
       setAutomobile('');
       setPrice('');
       props.loadSales()
+      props.loadAutos()
     }
   }
 ;

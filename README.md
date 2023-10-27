@@ -193,17 +193,17 @@ The sales microservice consists of 4 models :
 <details>
 <summary> Sales API functionality </summary>
 
-The way this API works is that a Sale is recorded by providing a Customer and Salesperson and an UNSOLD Automobile(identified by its VIN).
+- The way this API works is that a Sale is recorded by providing a Customer and Salesperson and an UNSOLD Automobile(identified by its VIN).
 
-The automobile is sold for a listed price and the sale is then recorded.
+- The automobile is sold for a listed price and the sale is then recorded.
 
-The unsold automobile is listed as SOLD and is no longer available for sale.
+- The unsold automobile is listed as SOLD and is no longer available for sale.
 
-The history of the sale is then provided in a list and can also be accessed by individual salesperson history.
+- The history of the sale is then provided in a list and can also be accessed by individual salesperson history.
 
-If needed, you can create a new customer or salesperson using the forms provided.
+- If needed, you can create a new customer or salesperson using the forms provided.
 
-If you wish to create a customer,salesperson, or sale, without using the provided forms feel free to utilize the insomnia requests provided in the shared resources folder under "doruk_sales".
+- If you wish to create a customer,salesperson, or sale, without using the provided forms feel free to utilize the insomnia requests provided in the shared resources folder under "doruk_sales".
 
 </details>
 
