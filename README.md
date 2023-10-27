@@ -1,5 +1,9 @@
 # CarCar
 
+## The premiere solution for automobile dealership management!
+
+![Logo](./ghi/app/public/rsz_car_logo.png)
+
 ## Team:
 
 - Jeff Balagosa
