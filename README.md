@@ -1,8 +1,6 @@
 # CarCar
 
-## _The premiere solution for automobile dealership management!_
-
-![Logo](./ghi/app/public/rsz_car_logo.png)
+![Logo](./shared_resources/CarCarLogo.png)
 
 ## Team:
 
