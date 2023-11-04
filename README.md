@@ -303,6 +303,88 @@ Endpoints for the appointments API are as follows:
 | Set appointment status to "canceled" | PUT    | http://localhost:8080/api/appointments/:id/cancel |
 | Set appointment status to "finished" | PUT    | http://localhost:8080/api/appointments/:id/finish |
 
+Creating an appointment requires the following fields:
+
+_Keep in mind that `technician` is a foreign key to the technicians table. So you will need to create a technician first._
+
+```JSON
+    {
+      "date_time": "2024-02-14T16:19:00+00:00",
+      "reason": "Oil change",
+      "vin": "12345678901234567",
+      "customer": "John Wick",
+      "technician": 1
+    }
+```
+
+The return value of `Create an appointment` is the appointment's information.
+
+```JSON
+{
+	"id": 4,
+	"date_time": "2024-02-14T16:19:00+00:00",
+	"reason": "Oil change",
+	"status": "created",
+	"vin": "12345678901234567",
+	"customer": "John Wick",
+	"technician": "David Brown"
+}
+```
+
+The return value `List of appointments` is a dictionary with the key "appointments" set to a list of appointments.
+
+```JSON
+{
+	"appointments": [
+		{
+			"id": 4,
+			"date_time": "2024-02-14T16:19:00+00:00",
+			"reason": "Oil change",
+			"status": "created",
+			"vin": "12345678901234567",
+			"customer": "John Wick",
+			"technician": "David Brown"
+		}
+	]
+}
+```
+
+The return value of `Delete a specific appointment` is a dictionary with the key "deleted" set to true.
+
+```JSON
+{
+  "deleted": true
+}
+```
+
+The return value of `Set appointment status to "canceled"` is a dictionary with the appointment's information with the key "status" set to "cancelled".
+
+```JSON
+{
+	"id": 5,
+	"date_time": "2022-01-04T10:00:00+00:00",
+	"reason": "Engine tune-up",
+	"status": "cancelled",
+	"vin": "12345678901234570",
+	"customer": "Samus Aran",
+	"technician": 5
+}
+```
+
+The return value of `Set appointment status to "finished"` is a dictionary with the appointment's information with the key "status" set to "finished".
+
+```JSON
+{
+	"id": 8,
+	"date_time": "2022-01-04T10:00:00+00:00",
+	"reason": "Engine tune-up",
+	"status": "finished",
+	"vin": "13345678901234580",
+	"customer": "Samush Arand",
+	"technician": 6
+}
+```
+
 ## Models
 
 <details>
