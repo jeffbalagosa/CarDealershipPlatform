@@ -34,90 +34,96 @@ function Nav() {
           className="collapse navbar-collapse justify-content-between"
           id="navbarSupportedContent"
         >
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Inventory
-              </Dropdown.Toggle>
+          <ul className="ms-auto navbar-nav mb-2 mb-lg-0">
+            <li>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Inventory
+                </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/manufacturer/list">
-                  Manufacturers
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/manufacturer/create">
-                  Create a Manufacturer
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item as={Link} to="/models/list">
-                  Models
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/models/create">
-                  Create a Model
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item as={Link} to="/automobiles/list">
-                  Automobiles
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/automobiles/create">
-                  Create an Automobile
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Sales
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/salespeople/list">
-                  Salespeople
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/sales/history">
-                  Salesperson History
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/salespeople/create">
-                  Add a Salesperson
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item as={Link} to="/sales/list">
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/manufacturer/list">
+                    Manufacturers
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/manufacturer/create">
+                    Create a Manufacturer
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item as={Link} to="/models/list">
+                    Models
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/models/create">
+                    Create a Model
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item as={Link} to="/automobiles/list">
+                    Automobiles
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/automobiles/create">
+                    Create an Automobile
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </li>
+            <li>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
                   Sales
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/sales/create">
-                  Add a Sale
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item as={Link} to="/customers/list">
-                  Customers
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/customers/create">
-                  Add a Customer
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Service
-              </Dropdown.Toggle>
+                </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item as={Link} to="/technicians/list">
-                  Technicians
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/technicians/create">
-                  Add Technician
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item as={Link} to="/appointments/list">
-                  Service Appointments
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/appointments/create">
-                  Add Service Appointment
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/appointments/history">
-                  Service History
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/salespeople/list">
+                    Salespeople
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/sales/history">
+                    Salesperson History
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/salespeople/create">
+                    Add a Salesperson
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item as={Link} to="/sales/list">
+                    Sales
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/sales/create">
+                    Add a Sale
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item as={Link} to="/customers/list">
+                    Customers
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/customers/create">
+                    Add a Customer
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </li>
+            <li>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Service
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/technicians/list">
+                    Technicians
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/technicians/create">
+                    Add Technician
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item as={Link} to="/appointments/list">
+                    Service Appointments
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/appointments/create">
+                    Add Service Appointment
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/appointments/history">
+                    Service History
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </li>
           </ul>
         </div>
       </div>
