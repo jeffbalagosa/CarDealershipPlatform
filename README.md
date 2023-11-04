@@ -247,6 +247,50 @@ Endpoints for the technicians API are as follows:
 | Create a technician          | POST   | http://localhost:8080/api/technicians/     |
 | Delete a specific technician | DELETE | http://localhost:8080/api/technicians/:id/ |
 
+Creating a technician requires the following fields:
+
+```JSON
+    {
+      "first_name": "Clark",
+      "last_name": "Kent",
+      "employee_id": 1
+    }
+```
+
+The return value of `Create a technician` is the technician's information.
+
+```JSON
+{
+  "first_name": "Clark",
+  "last_name": "Kent",
+  "employee_id": 1,
+  "system_id": 1
+}
+```
+
+The return value `List of technicians` is a dictionary with the key "technicians" set to a list of technicians.
+
+```JSON
+{
+	"technicians": [
+		{
+			"first_name": "David",
+			"last_name": "Brown",
+			"employee_id": "001",
+			"system_id": 1
+		}
+	]
+}
+```
+
+The return value of `Delete a specific technician` is a dictionary with the key "deleted" set to true.
+
+```JSON
+{
+	"deleted": true
+}
+```
+
 ### Appointments
 
 Endpoints for the appointments API are as follows:
