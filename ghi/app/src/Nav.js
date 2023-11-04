@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 function Nav() {
   return (
@@ -33,16 +34,20 @@ function Nav() {
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/manufacturer/list">
-                Manufacturers
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/manufacturer/create">
-                Create a Manufacturer
-              </NavLink>
-            </li>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Inventory
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="/manufacturer/list">
+                  Manufacturers
+                </Dropdown.Item>
+                <Dropdown.Item href="/manufacturer/create">
+                  Create a Manufacturer
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
             <li className="nav-item">
               <NavLink className="nav-link" to="/models/list">
                 Models
