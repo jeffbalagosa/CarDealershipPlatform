@@ -29,96 +29,237 @@
 
 ![Diagram](./shared_resources/model_diagram.png)
 
-## API Documentation
+## Inventory Microservice API Documentation
 
-### URLs and Ports
+### Vehicle Manufacturers
 
-- React Front-End: http://localhost:3000/
+Endpoints for the manufacturers API are as follows:
 
-**Inventory Front-End**
+| Action                         | Method | URL                                          |
+| ------------------------------ | ------ | -------------------------------------------- |
+| List mnaufacturers             | GET    | http://localhost:8100/api/manufacturers/     |
+| Create a manufacturer          | POST   | http://localhost:8100/api/manufacturers/     |
+| Get a specific manufacturer    | GET    | http://localhost:8100/api/manufacturers/:id/ |
+| Update a specific manufacturer | PUT    | http://localhost:8100/api/manufacturers/:id/ |
+| Delete a specific manufacturer | DELETE | http://localhost:8100/api/manufacturers/:id/ |
 
-- <details>
-  <summary>Manufacturers:</summary>
+Creating and updating a manufacturer requires only the manufacturer's name.
 
-  - List: http://localhost:3000/manufacturer/list
-  - Create: http://localhost:3000/manufacturer/create
-  </details>
+```JSON
+{
+  "name": "Chrysler"
+}
+```
 
-- <details>
-  <summary>Models:</summary>
+The return value of creating, getting, and updating a single manufacturer is its name, href, and id.
 
-  - List: http://localhost:3000/model/list
-  - Create: http://localhost:3000/model/create
-  </details>
+```JSON
+{
+  "href": "/api/manufacturers/1/",
+  "id": 1,
+  "name": "Chrysler"
+}
+```
 
-- <details>
-  <summary>Automobiles:</summary>
+The list of manufacturers is a dictionary with the key "manufacturers" set to a list of manufacturers.
 
-  - List: http://localhost:3000/automobile/list
-  - Create: http://localhost:3000/automobile/create
-  </details>
+```JSON
+{
+  "manufacturers": [
+    {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  ]
+}
+```
 
-**Service and Sales Front-End**
+### Vehicle Models
 
-- <details>
-  <summary>Service:</summary>
+Endpoints for the models API are as follows:
 
-  - Technician List: http://localhost:3000/technicians/list
-  - Create Technician: http://localhost:3000/technicians/create
-  - Appointment List: http://localhost:3000/appointments/list
-  - Create Appointment: http://localhost:3000/appointments/create
-  - Appointment History List: http://localhost:3000/appointments/history
-  </details>
+| Action                  | Method | URL                                   |
+| ----------------------- | ------ | ------------------------------------- |
+| List models             | GET    | http://localhost:8100/api/models/     |
+| Create a model          | POST   | http://localhost:8100/api/models/     |
+| Get a specific model    | GET    | http://localhost:8100/api/models/:id/ |
+| Update a specific model | PUT    | http://localhost:8100/api/models/:id/ |
+| Delete a specific model | DELETE | http://localhost:8100/api/models/:id/ |
 
-- <details>
-  <summary>Sales:</summary>
+Creating a model requires the following fields:
 
-  - Salesperson List: http://localhost:3000/salespeople/list
-  - Create Salesperson: http://localhost:3000/salespeople/create
-  - Customer List: http://localhost:3000/customer/list
-  - Create Customer: http://localhost:3000/customer/create
-  - Sales List: http://localhost:3000/sales/list
-  - Create Sale: http://localhost:3000/sales/create
-  - Sales History List: http://localhost:3000/sales/history
-  </details>
+```JSON
+{
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+  "manufacturer_id": 1
+}
+```
 
-**Inventory Back-End**
+Updating a model requires the following fields.:
 
-- <details>
-  <summary>Manufacturers:</summary>
+_Note: It is not possible to update a vehicle model's manufacturer._
 
-  - GET request for list of manufacturers: http://localhost:8100/api/manufacturers/
-  - POST request to add manufacturer: http://localhost:8100/api/manufacturers/
-  - DELETE request for individual manufacturer: http://localhost:8100/api/manufacturers/:id/
-  - PUT request for updating individual manufacturer: http://localhost:8100/api/manufacturers/:id/
-  - GET request for showing individual manufacturer: http://localhost:8100/api/manufacturers/:id/
-  </details>
+```JSON
+{
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg"
+}
+```
 
-- <details>
-  <summary>Models:</summary>
+Getting the detail of a vehicle model, or the return value from creating or updating a vehicle model, returns the model's information and the manufacturer's information.
 
-  - GET request for list of models: http://localhost:8100/api/models/
-  - POST request to add models: http://localhost:8100/api/models/
-  - DELETE request for individual models: http://localhost:8100/api/models/:id/
-  - PUT request for updating individual models: http://localhost:8100/api/models/:id/
-  - GET request for showing individual models: http://localhost:8100/api/models/:id/
-  </details>
+```JSON
+{
+  "href": "/api/models/1/",
+  "id": 1,
+  "name": "Sebring",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+  "manufacturer": {
+    "href": "/api/manufacturers/1/",
+    "id": 1,
+    "name": "Daimler-Chrysler"
+  }
+}
+```
 
-- <details>
-  <summary>Automobiles:</summary>
+Getting a list of vehicle models returns a list of the detail information with the key "models".
 
-  - GET request for list of automobiles: http://localhost:8100/api/automobiles/
-  - POST request to add automobiles: http://localhost:8100/api/automobiles/
-  - DELETE request for individual automobiles: http://localhost:8100/api/automobiles/:vin/
-  - PUT request for updating individual automobiles: http://localhost:8100/api/automobiles/:vin/
-  - GET request for showing individual automobiles: http://localhost:8100/api/automobiles/:vin/
-  </details>
+```JSON
+{
+  "models": [
+    {
+      "href": "/api/models/1/",
+      "id": 1,
+      "name": "Sebring",
+      "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+      "manufacturer": {
+        "href": "/api/manufacturers/1/",
+        "id": 1,
+        "name": "Daimler-Chrysler"
+      }
+    }
+  ]
+}
+```
 
-- The back-end urls and ports for the **Service** and **Sales** microservices are included in the Insomnia Exports of the [shared_resources/](./shared_resources/) folder.
+### Automobile information
 
-### Service API
+Endpoints for the automobiles API are as follows:
 
-#### Models
+_Note: The identifiers for automobiles in this API are not integer ids. They are the Vehicle Identification Number (VIN) for the specific automobile._
+
+| Action                       | Method | URL                                         |
+| ---------------------------- | ------ | ------------------------------------------- |
+| List automobiles             | GET    | http://localhost:8100/api/automobiles/      |
+| Create an automobile         | POST   | http://localhost:8100/api/automobiles/      |
+| Get a specific automobile    | GET    | http://localhost:8100/api/automobiles/:vin/ |
+| Update a specific automobile | PUT    | http://localhost:8100/api/automobiles/:vin/ |
+| Delete a specific automobile | DELETE | http://localhost:8100/api/automobiles/:vin/ |
+
+Creating an automobile requires the following fields:
+
+```JSON
+{
+  "color": "red",
+  "year": 2012,
+  "vin": "1C3CC5FB2AN120174",
+  "model_id": 1
+}
+```
+
+As noted, you query an automobile by its VIN. For example, you would use the URL
+
+`http://localhost:8100/api/automobiles/1C3CC5FB2AN120174/`
+
+to get the details for the car with the VIN "1C3CC5FB2AN120174". The details for an automobile include its model and manufacturer.
+
+```JSON
+{
+  "href": "/api/automobiles/1C3CC5FB2AN120174/",
+  "id": 1,
+  "color": "yellow",
+  "year": 2013,
+  "vin": "1C3CC5FB2AN120174",
+  "model": {
+    "href": "/api/models/1/",
+    "id": 1,
+    "name": "Sebring",
+    "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+    "manufacturer": {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  },
+  "sold": false
+}
+```
+
+You can update the color, year, and sold status of an automobile.
+
+```JSON
+{
+  "color": "red",
+  "year": 2012,
+  "sold": true
+}
+```
+
+Getting a list of automobiles returns a dictionary with the key "autos" set to a list of automobile information.
+
+```JSON
+{
+  "autos": [
+    {
+      "href": "/api/automobiles/1C3CC5FB2AN120174/",
+      "id": 1,
+      "color": "yellow",
+      "year": 2013,
+      "vin": "1C3CC5FB2AN120174",
+      "model": {
+        "href": "/api/models/1/",
+        "id": 1,
+        "name": "Sebring",
+        "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+        "manufacturer": {
+          "href": "/api/manufacturers/1/",
+          "id": 1,
+          "name": "Daimler-Chrysler"
+        }
+      },
+      "sold": false
+    }
+  ]
+}
+```
+
+## Automobile Service Microservice API Documentation
+
+### Technicians
+
+Endpoints for the technicians API are as follows:
+
+| Action                       | Method | URL                                        |
+| ---------------------------- | ------ | ------------------------------------------ |
+| List technicians             | GET    | http://localhost:8080/api/technicians/     |
+| Create a technician          | POST   | http://localhost:8080/api/technicians/     |
+| Delete a specific technician | DELETE | http://localhost:8080/api/technicians/:id/ |
+
+### Appointments
+
+Endpoints for the appointments API are as follows:
+
+| Action                               | Method | URL                                               |
+| ------------------------------------ | ------ | ------------------------------------------------- |
+| List appointments                    | GET    | http://localhost:8080/api/appointments/           |
+| Create an appointment                | POST   | http://localhost:8080/api/appointments/           |
+| Delete a specific appointment        | DELETE | http://localhost:8080/api/appointments/:id/       |
+| Set appointment status to "canceled" | PUT    | http://localhost:8080/api/appointments/:id/cancel |
+| Set appointment status to "finished" | PUT    | http://localhost:8080/api/appointments/:id/finish |
+
+## Models
 
 <details>
 <summary>AutomobileVO:</summary>
