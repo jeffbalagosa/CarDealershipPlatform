@@ -711,9 +711,12 @@ The return value of deleting a sale is a dictionary with the key "deleted" set t
 
 ## Engineering Team
 
-- Jeff Balagosa
-  - Service Microservice
-  - Front-end **list** components for Inventory Microservice.
-- Doruk Hacioglu
-  - Sales Microservice
-  - Front-end **form** components for Inventory Microservice.
+### Jeff Balagosa
+
+- Service Microservice
+- Front-end **list** components for Inventory Microservice.
+
+### Doruk Hacioglu
+
+- Sales Microservice
+- Front-end **form** components for Inventory Microservice.
