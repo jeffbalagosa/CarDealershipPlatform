@@ -5,7 +5,6 @@
 ## Table of Contents
 
 - [CarCar](#carcar)
-  - [Engineering Team](#engineering-team)
   - [How to run this app](#how-to-run-this-app)
   - [Testing](#testing)
   - [Design Diagram](#design-diagram)
@@ -23,15 +22,7 @@
   - [Models](#models)
     - [Automobile Service Microservice](#automobile-service-microservice)
     - [Automobile Sales Microservice](#automobile-sales-microservice)
-
-## Engineering Team
-
-- Jeff Balagosa
-  - Service Microservice
-  - Front-end **list** components for Inventory Microservice.
-- Doruk Hacioglu
-  - Sales Microservice
-  - Front-end **form** components for Inventory Microservice.
+  - [Engineering Team](#engineering-team)
 
 ## How to run this app
 
@@ -717,3 +708,12 @@ The return value of deleting a sale is a dictionary with the key "deleted" set t
 - `customer` : foreign key, uses the customer model to assign a customer for each individual sale
 - `automobile` : foreign key, uses the AutomobileVO model to pull individual cars from inventory and assign them to a sale.
 </details>
+
+## Engineering Team
+
+- Jeff Balagosa
+  - Service Microservice
+  - Front-end **list** components for Inventory Microservice.
+- Doruk Hacioglu
+  - Sales Microservice
+  - Front-end **form** components for Inventory Microservice.
