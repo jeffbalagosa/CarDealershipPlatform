@@ -43,6 +43,9 @@ Endpoints for the manufacturers API are as follows:
 | Update a specific manufacturer | PUT    | http://localhost:8100/api/manufacturers/:id/ |
 | Delete a specific manufacturer | DELETE | http://localhost:8100/api/manufacturers/:id/ |
 
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
+
 Creating and updating a manufacturer requires only the manufacturer's name.
 
 ```JSON
@@ -75,6 +78,8 @@ The list of manufacturers is a dictionary with the key "manufacturers" set to a 
 }
 ```
 
+</details>
+
 ### Vehicle Models
 
 Endpoints for the models API are as follows:
@@ -86,6 +91,9 @@ Endpoints for the models API are as follows:
 | Get a specific model    | GET    | http://localhost:8100/api/models/:id/ |
 | Update a specific model | PUT    | http://localhost:8100/api/models/:id/ |
 | Delete a specific model | DELETE | http://localhost:8100/api/models/:id/ |
+
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
 
 Creating a model requires the following fields:
 
@@ -144,6 +152,8 @@ Getting a list of vehicle models returns a list of the detail information with t
 }
 ```
 
+</details>
+
 ### Automobile information
 
 Endpoints for the automobiles API are as follows:
@@ -157,6 +167,9 @@ _Note: The identifiers for automobiles in this API are not integer ids. They are
 | Get a specific automobile    | GET    | http://localhost:8100/api/automobiles/:vin/ |
 | Update a specific automobile | PUT    | http://localhost:8100/api/automobiles/:vin/ |
 | Delete a specific automobile | DELETE | http://localhost:8100/api/automobiles/:vin/ |
+
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
 
 Creating an automobile requires the following fields:
 
@@ -235,6 +248,8 @@ Getting a list of automobiles returns a dictionary with the key "autos" set to a
 }
 ```
 
+</details>
+
 ## Automobile Service Microservice API Documentation
 
 ### Technicians
@@ -246,6 +261,9 @@ Endpoints for the technicians API are as follows:
 | List technicians             | GET    | http://localhost:8080/api/technicians/     |
 | Create a technician          | POST   | http://localhost:8080/api/technicians/     |
 | Delete a specific technician | DELETE | http://localhost:8080/api/technicians/:id/ |
+
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
 
 Creating a technician requires the following fields:
 
@@ -291,6 +309,8 @@ The return value of `Delete a specific technician` is a dictionary with the key 
 }
 ```
 
+</details>
+
 ### Appointments
 
 Endpoints for the appointments API are as follows:
@@ -302,6 +322,9 @@ Endpoints for the appointments API are as follows:
 | Delete a specific appointment        | DELETE | http://localhost:8080/api/appointments/:id/       |
 | Set appointment status to "canceled" | PUT    | http://localhost:8080/api/appointments/:id/cancel |
 | Set appointment status to "finished" | PUT    | http://localhost:8080/api/appointments/:id/finish |
+
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
 
 Creating an appointment requires the following fields:
 
@@ -385,6 +408,8 @@ The return value of `Set appointment status to "finished"` is a dictionary with 
 }
 ```
 
+</details>
+
 ## Automobile Sales API Documentation
 
 ### Salespeople
@@ -396,6 +421,9 @@ Endpoints for the salespeople API are as follows:
 | List salespeople              | GET    | http://localhost:8090/api/salespeople/     |
 | Create a salesperson          | POST   | http://localhost:8090/api/salespeople/     |
 | Delete a specific salesperson | DELETE | http://localhost:8090/api/salespeople/:id/ |
+
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
 
 Creating a salesperson requires the following fields:
 
@@ -441,6 +469,8 @@ The return value of deleting a salesperson is a dictionary with the key "deleted
 }
 ```
 
+</details>
+
 ### Customers
 
 Endpoints for the customers API are as follows:
@@ -450,6 +480,9 @@ Endpoints for the customers API are as follows:
 | List customers             | GET    | http://localhost:8090/api/customers/     |
 | Create a customer          | POST   | http://localhost:8090/api/customers/     |
 | Delete a specific customer | DELETE | http://localhost:8090/api/customers/:id/ |
+
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
 
 Creating a customer requires the following fields:
 
@@ -498,6 +531,8 @@ The return value of deleting a customer is a dictionary with the key "deleted" s
 }
 ```
 
+</details>
+
 ### Sales
 
 Endpoints for the sales API are as follows:
@@ -507,6 +542,9 @@ Endpoints for the sales API are as follows:
 | List sales             | GET    | http://localhost:8090/api/sales/     |
 | Create a sale          | POST   | http://localhost:8090/api/sales/     |
 | Delete a specific sale | DELETE | http://localhost:8090/api/sales/:id/ |
+
+<details>
+<summary>Sample JSON Inputs and Outputs</summary>
 
 Creating a sale requires the following fields:
 
@@ -584,6 +622,8 @@ The return value of deleting a sale is a dictionary with the key "deleted" set t
   "deleted": true
 }
 ```
+
+</details>
 
 ## Models
 
