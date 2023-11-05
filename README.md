@@ -385,38 +385,37 @@ The return value of `Set appointment status to "finished"` is a dictionary with 
 }
 ```
 
-## Models
+## Automobile Sales API Documentation
 
-<details>
-<summary>AutomobileVO:</summary>
+### Salespeople
 
-- `import_href`: Didn't really need to use this, but handy to have there in case I did.
-- `vin`: Primarily used to determin VIP Status of Customers.
-- `sold`: Also, primarily used to determin VIP Status of Customers.
-</details>
+Endpoints for the salespeople API are as follows:
 
-<details>
-<summary>Technician:</summary>
+| Action                        | Method | URL                                        |
+| ----------------------------- | ------ | ------------------------------------------ |
+| List salespeople              | GET    | http://localhost:8090/api/salespeople/     |
+| Create a salesperson          | POST   | http://localhost:8090/api/salespeople/     |
+| Delete a specific salesperson | DELETE | http://localhost:8090/api/salespeople/:id/ |
 
-- `first_name`: Standard character field. If I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
-- `last_name`: Standard character field. Same as above, if I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
-- `employee_id`: Standard character field. Per project specs, it needs to be there, but I think a better way would be to reference the auto generated database `id`. Less manual entry for the user, numbers would be sequential and unique
-- `get_api_url()`: to generate the href.
-</details>
+### Customers
 
-<details>
-<summary>Appointment:</summary>
+Endpoints for the customers API are as follows:
 
-- `date_time`: utilized Django's `DateTimeField()` for obvious reasons. Formatting to and from front end was an interesting challenge.
-- `reason`: made this a text field because reason entrieas could potentially be in paragraph form.
-- `status`: I considered making this its own model to make **created**, **finished**, and **cancelled** its own properties. But kept it simple.
-- `vin`: Separate entry from the VO vin. Mainly used to identify VIP status, search, and keep track of customer history.
-- `customer`: Standard `Charfield()`. Specs didn't specify a separate first_name and last_name property. Didn't think it was required for this use case either.
-- `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
-- `get_api_url()`: to generate the href.
-</details>
+| Action                     | Method | URL                                      |
+| -------------------------- | ------ | ---------------------------------------- |
+| List customers             | GET    | http://localhost:8090/api/customers/     |
+| Create a customer          | POST   | http://localhost:8090/api/customers/     |
+| Delete a specific customer | DELETE | http://localhost:8090/api/customers/:id/ |
 
-### Sales API
+### Sales
+
+Endpoints for the sales API are as follows:
+
+| Action                 | Method | URL                                  |
+| ---------------------- | ------ | ------------------------------------ |
+| List sales             | GET    | http://localhost:8090/api/sales/     |
+| Create a sale          | POST   | http://localhost:8090/api/sales/     |
+| Delete a specific sale | DELETE | http://localhost:8090/api/sales/:id/ |
 
 The sales microservice consists of 4 models :
 
@@ -486,6 +485,37 @@ The sales microservice consists of 4 models :
 - The Appointment history list, keeps track of all appointments regardless of status. You can search by vin to filter out specific appointments.
 - Both lists show VIP status of each appointment. VIP status is flagged if the car's VIN is in our inventory database with the status of **sold**.
 
+</details>
+
+## Models
+
+<details>
+<summary>AutomobileVO:</summary>
+
+- `import_href`: Didn't really need to use this, but handy to have there in case I did.
+- `vin`: Primarily used to determin VIP Status of Customers.
+- `sold`: Also, primarily used to determin VIP Status of Customers.
+</details>
+
+<details>
+<summary>Technician:</summary>
+
+- `first_name`: Standard character field. If I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
+- `last_name`: Standard character field. Same as above, if I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
+- `employee_id`: Standard character field. Per project specs, it needs to be there, but I think a better way would be to reference the auto generated database `id`. Less manual entry for the user, numbers would be sequential and unique
+- `get_api_url()`: to generate the href.
+</details>
+
+<details>
+<summary>Appointment:</summary>
+
+- `date_time`: utilized Django's `DateTimeField()` for obvious reasons. Formatting to and from front end was an interesting challenge.
+- `reason`: made this a text field because reason entrieas could potentially be in paragraph form.
+- `status`: I considered making this its own model to make **created**, **finished**, and **cancelled** its own properties. But kept it simple.
+- `vin`: Separate entry from the VO vin. Mainly used to identify VIP status, search, and keep track of customer history.
+- `customer`: Standard `Charfield()`. Specs didn't specify a separate first_name and last_name property. Didn't think it was required for this use case either.
+- `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
+- `get_api_url()`: to generate the href.
 </details>
 
 ## Value Objects
