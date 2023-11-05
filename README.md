@@ -454,12 +454,48 @@ Endpoints for the customers API are as follows:
 Creating a customer requires the following fields:
 
 ```JSON
-    {
-      "first_name": "Harry",
-      "last_name": "Potter",
-      "address": "4 Privet Drive",
-      "phone_number" : "1231231234"
-    }
+{
+  "first_name": "Harry",
+  "last_name": "Potter",
+  "address": "4 Privet Drive",
+  "phone_number" : "1231231234"
+}
+```
+
+The return value of creating a customer is the customer's information.
+
+```JSON
+{
+  "first_name": "Harry",
+  "last_name": "Potter",
+  "address": "4 Privet Drive",
+  "phone_number": "1231231234",
+  "id": 1
+}
+```
+
+The return value of listing customers is a dictionary with the key "customers" set to a list of customers.
+
+```JSON
+{
+	"customers": [
+		{
+			"first_name": "Ham",
+			"last_name": "Cheese",
+			"address": "1234 fridge street",
+			"phone_number": "1231231234",
+			"id": 1
+		}
+	]
+}
+```
+
+The return value of deleting a customer is a dictionary with the key "deleted" set to true.
+
+```JSON
+{
+  "deleted": true
+}
 ```
 
 ### Sales
@@ -483,6 +519,70 @@ _Note: The salesperson and customer are referenced by their "id"s , additionally
       "automobile": "VIN",
       "price": "40000"
     }
+```
+
+The return value of creating a sale is the sale's information.
+
+```JSON
+{
+	"price": "40000",
+	"customer": {
+		"first_name": "Ham",
+		"last_name": "Cheese",
+		"address": "1234 fridge street",
+		"phone_number": "1231231234",
+		"id": 1
+	},
+	"salesperson": {
+		"first_name": "Albus",
+		"last_name": "Dumbledore",
+		"employee_id": 1,
+		"id": 1
+	},
+	"automobile": {
+		"vin": "1C3CC5FB2AN120174",
+		"import_href": "/api/automobiles/1C3CC5FB2AN120174/"
+	},
+	"id": 1
+}
+```
+
+list sales returns a dictionary with the key "sales" set to a list of sales.
+
+```JSON
+{
+	"sales": [
+		{
+			"price": "40000",
+			"customer": {
+				"first_name": "Ham",
+				"last_name": "Cheese",
+				"address": "1234 fridge street",
+				"phone_number": "1231231234",
+				"id": 1
+			},
+			"salesperson": {
+				"first_name": "Albus",
+				"last_name": "Dumbledore",
+				"employee_id": 1,
+				"id": 1
+			},
+			"automobile": {
+				"vin": "1C3CC5FB2AN120174",
+				"import_href": "/api/automobiles/1C3CC5FB2AN120174/"
+			},
+			"id": 1
+		}
+	]
+}
+```
+
+The return value of deleting a sale is a dictionary with the key "deleted" set to true.
+
+```JSON
+{
+  "deleted": true
+}
 ```
 
 ## Models
