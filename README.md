@@ -397,6 +397,50 @@ Endpoints for the salespeople API are as follows:
 | Create a salesperson          | POST   | http://localhost:8090/api/salespeople/     |
 | Delete a specific salesperson | DELETE | http://localhost:8090/api/salespeople/:id/ |
 
+Creating a salesperson requires the following fields:
+
+```JSON
+{
+  "first_name": "Albus",
+  "last_name": "Dumbledore",
+  "employee_id": 1
+}
+```
+
+The return value of creating a salesperson is the salesperson's information.
+
+```JSON
+{
+	"first_name": "Albus",
+	"last_name": "Dumbledore",
+	"employee_id": 1,
+	"id": 1
+}
+```
+
+The return value of listing salespeople is a dictionary with the key "salespersons" set to a list of salespeople.
+
+```JSON
+{
+	"salespersons": [
+		{
+			"first_name": "Albus",
+			"last_name": "Dumbledore",
+			"employee_id": 1,
+			"id": 1
+		}
+	]
+}
+```
+
+The return value of deleting a salesperson is a dictionary with the key "deleted" set to true.
+
+```JSON
+{
+  "deleted": true
+}
+```
+
 ### Customers
 
 Endpoints for the customers API are as follows:
@@ -406,6 +450,17 @@ Endpoints for the customers API are as follows:
 | List customers             | GET    | http://localhost:8090/api/customers/     |
 | Create a customer          | POST   | http://localhost:8090/api/customers/     |
 | Delete a specific customer | DELETE | http://localhost:8090/api/customers/:id/ |
+
+Creating a customer requires the following fields:
+
+```JSON
+    {
+      "first_name": "Harry",
+      "last_name": "Potter",
+      "address": "4 Privet Drive",
+      "phone_number" : "1231231234"
+    }
+```
 
 ### Sales
 
@@ -417,7 +472,53 @@ Endpoints for the sales API are as follows:
 | Create a sale          | POST   | http://localhost:8090/api/sales/     |
 | Delete a specific sale | DELETE | http://localhost:8090/api/sales/:id/ |
 
-The sales microservice consists of 4 models :
+Creating a sale requires the following fields:
+
+_Note: The salesperson and customer are referenced by their "id"s , additionally you must use an automobile VIN from the inventory API._
+
+```JSON
+    {
+      "salesperson": "1",
+      "customer": "1",
+      "automobile": "VIN",
+      "price": "40000"
+    }
+```
+
+## Models
+
+### Automobile Service Microservice
+
+<details>
+<summary>AutomobileVO:</summary>
+
+- `import_href`: Didn't really need to use this, but handy to have there in case I did.
+- `vin`: Primarily used to determin VIP Status of Customers.
+- `sold`: Also, primarily used to determin VIP Status of Customers.
+</details>
+
+<details>
+<summary>Technician:</summary>
+
+- `first_name`: Standard character field. If I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
+- `last_name`: Standard character field. Same as above, if I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
+- `employee_id`: Standard character field. Per project specs, it needs to be there, but I think a better way would be to reference the auto generated database `id`. Less manual entry for the user, numbers would be sequential and unique
+- `get_api_url()`: to generate the href.
+</details>
+
+<details>
+<summary>Appointment:</summary>
+
+- `date_time`: utilized Django's `DateTimeField()` for obvious reasons. Formatting to and from front end was an interesting challenge.
+- `reason`: made this a text field because reason entrieas could potentially be in paragraph form.
+- `status`: I considered making this its own model to make **created**, **finished**, and **cancelled** its own properties. But kept it simple.
+- `vin`: Separate entry from the VO vin. Mainly used to identify VIP status, search, and keep track of customer history.
+- `customer`: Standard `Charfield()`. Specs didn't specify a separate first_name and last_name property. Didn't think it was required for this use case either.
+- `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
+- `get_api_url()`: to generate the href.
+</details>
+
+### Automobile Sales Microservice
 
 <details>
 <summary> AutomobileVO </summary>
@@ -454,70 +555,3 @@ The sales microservice consists of 4 models :
 - `customer` : foreign key, uses the customer model to assign a customer for each individual sale
 - `automobile` : foreign key, uses the AutomobileVO model to pull individual cars from inventory and assign them to a sale.
 </details>
-
-### Functionality
-
-<details>
-<summary> Sales API functionality </summary>
-
-- The way this API works is that a Sale is recorded by providing a Customer and Salesperson and an UNSOLD Automobile(identified by its VIN).
-
-- The automobile is sold for a listed price and the sale is then recorded.
-
-- The unsold automobile is listed as SOLD and is no longer available for sale.
-
-- The history of the sale is then provided in a list and can also be accessed by individual salesperson history.
-
-- If needed, you can create a new customer or salesperson using the forms provided.
-
-- If you wish to create a customer,salesperson, or sale, without using the provided forms feel free to utilize the insomnia requests provided in the shared resources folder under "doruk_sales".
-
-</details>
-
-<details>
-<summary> Service API functionality </summary>
-
-- The form to add a technician is straight forward, each field has change handlers to update state dynamically.
-- Clicking the **Add Technician** initiates the **POST** request.
-- I added a success message upon recieving a good response. The view functions also include `404` responses for failures.
-- The form to add an appointment has a list dropdown for technicians populated by the database.
-- The Appointments list has functionality to either _cancel_ or _finish_ appointments via button click. The list is dynamically filtered for new (aka _created_ status) appointments. As you click, they are removed from the appointment list.
-- The Appointment history list, keeps track of all appointments regardless of status. You can search by vin to filter out specific appointments.
-- Both lists show VIP status of each appointment. VIP status is flagged if the car's VIN is in our inventory database with the status of **sold**.
-
-</details>
-
-## Models
-
-<details>
-<summary>AutomobileVO:</summary>
-
-- `import_href`: Didn't really need to use this, but handy to have there in case I did.
-- `vin`: Primarily used to determin VIP Status of Customers.
-- `sold`: Also, primarily used to determin VIP Status of Customers.
-</details>
-
-<details>
-<summary>Technician:</summary>
-
-- `first_name`: Standard character field. If I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
-- `last_name`: Standard character field. Same as above, if I had more time to refactor, I'd reduce the character size. 200 is probably overkill.
-- `employee_id`: Standard character field. Per project specs, it needs to be there, but I think a better way would be to reference the auto generated database `id`. Less manual entry for the user, numbers would be sequential and unique
-- `get_api_url()`: to generate the href.
-</details>
-
-<details>
-<summary>Appointment:</summary>
-
-- `date_time`: utilized Django's `DateTimeField()` for obvious reasons. Formatting to and from front end was an interesting challenge.
-- `reason`: made this a text field because reason entrieas could potentially be in paragraph form.
-- `status`: I considered making this its own model to make **created**, **finished**, and **cancelled** its own properties. But kept it simple.
-- `vin`: Separate entry from the VO vin. Mainly used to identify VIP status, search, and keep track of customer history.
-- `customer`: Standard `Charfield()`. Specs didn't specify a separate first_name and last_name property. Didn't think it was required for this use case either.
-- `technician`: This is a foreign key and needed it here for the form dropdown. An interesting challenge would be show a list of what technicians are working on what cars. Perhaps I'll attemp as a stretch goal.
-- `get_api_url()`: to generate the href.
-</details>
-
-## Value Objects
-
-Value Object - Automobile: A Value object that gets the data from the automobiles in the inventory, this is done via a poller that pulls data every 60 seconds.
